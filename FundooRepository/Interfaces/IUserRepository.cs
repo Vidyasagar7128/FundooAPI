@@ -9,5 +9,8 @@ namespace FundooRepository.Interfaces
 
         string Register(RegisterModel userModel);
         RegisterModel Login(LoginModel loginModel);
+        string SendEmailforResetPassword(string email);
+        string ChangePassword();
+        string ChangePasswordUsingPassword(ForgotPassword forgotPassword);
     }
 }

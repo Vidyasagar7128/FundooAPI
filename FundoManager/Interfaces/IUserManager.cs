@@ -6,5 +6,7 @@ namespace FundoManager.Interface
     {
         string Register(RegisterModel userData);
         RegisterModel LoginUser(LoginModel login);
+        string SendEmailResetPassword(string email);
+        string ChangePasswordUsingConfirmPassword(ForgotPassword forgotPassword);
     }
 }

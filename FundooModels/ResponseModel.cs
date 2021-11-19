@@ -8,7 +8,7 @@ namespace FundooModels
     {
         public bool Status { get; set; }
         public string Message { get; set; }
-        public T UserId { get; set; }
+        public T Data { get; set; }
 
     }
 }

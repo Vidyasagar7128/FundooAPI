@@ -35,5 +35,27 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public string SendEmailResetPassword(string email)
+        {
+            try
+            {
+                return this._repository.SendEmailforResetPassword(email);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public string ChangePasswordUsingConfirmPassword(ForgotPassword forgotPassword)
+        {
+            try
+            {
+                return this._repository.ChangePasswordUsingPassword(forgotPassword);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
