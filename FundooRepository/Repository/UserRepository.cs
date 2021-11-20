@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -101,7 +102,7 @@ namespace FundooRepository.Repository
             {
                 var checkEmail = this._userContext.Users.Where(e => e.Email == email).FirstOrDefault();
                 if (checkEmail != null)
-                    return ChangePassword();
+                    return ChangePassword(email);
                 else
                     return "Email does not Exist!";
             }
@@ -110,9 +111,25 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
-        public string ChangePassword()
+        private string ChangePassword(string email)
         {
-            return "Click that Link given in Email to change Password. Thank You! Team Fundoo App. ";
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(this.Configuration.GetValue<string>("EmailId"));
+                mail.To.Add(email);
+                mail.Subject = "[FunDoo] Password Reset Link";
+                mail.Body = "Do you want to change your Password!";
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com",587);
+                smtpClient.Credentials = new System.Net.NetworkCredential(this.Configuration.GetValue<string>("EmailId"),this.Configuration.GetValue<string>("Password"));
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(mail);
+                return "Email Sent Succesfully!";
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

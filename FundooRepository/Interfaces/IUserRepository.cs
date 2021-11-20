@@ -10,6 +10,5 @@ namespace FundooRepository.Interfaces
         string Register(RegisterModel userModel);
         string Login(LoginModel loginModel);
         string SendEmailforResetPassword(string email);
-        string ChangePassword();
     }
 }

@@ -18,7 +18,7 @@ namespace FundooModels
           ErrorMessage = "Lastname is Invalid.")]
         public string LastName { get; set; }
         [Required]
-        [RegularExpression(@"^[a-z]+[@]+[a-z]+[.]+[a-z]{3}$",
+        [RegularExpression(@"^[a-z]+[0-9]+[@]+[a-z]+[.]+[a-z]{3}$",
           ErrorMessage = "Email is Invalid.")]
         public string Email { get; set; }
         [Required]
