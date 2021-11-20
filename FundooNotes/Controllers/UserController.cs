@@ -75,13 +75,12 @@ namespace FundooNotes.Controllers
             try
             {
                 var result = this._userManager.LoginUser(loginDetails);
-                if (result != null)
+                if (result.Equals("Login Succesful"))
                 {
                     return this.Ok(new ResponseModel<string>()
                     {
                         Status = true,
-                        Message = result.FirstName.ToString(),
-                        Data = result.Id.ToString()
+                        Message = result
                     });
                 }
                 else
@@ -89,7 +88,7 @@ namespace FundooNotes.Controllers
                     return this.BadRequest(new ResponseModel<string>()
                     {
                         Status = false,
-                        Message = "User Not Found by this Details!"
+                        Message = result
                     });
                 }
             }
@@ -135,45 +134,6 @@ namespace FundooNotes.Controllers
                 });
             }
         }
-        /// <summary>
-        /// for Change Password Using Password & Confirm Password Controller Method
-        /// </summary>
-        /// <param name="forgotPassword"></param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("api/changepassword")]
-        public IActionResult ChangePasswordUsingPassword([FromBody] ForgotPassword forgotPassword)
-        {
-            try
-            {
-                var result = this._userManager.ChangePasswordUsingConfirmPassword(forgotPassword);
-                if(result.Equals("Password Changed Succesfully!"))
-                {
-                    return this.Ok(new ResponseModel<string>()
-                    {
-                        Status = true,
-                        Message = "Password Changed Succesfully!",
-                    });
-                }else if(result.Equals("Something went Wrong!"))
-                {
-                    return this.NotFound(new ResponseModel<string>() {
-                        Status = false,
-                        Message = "Something went Wrong!",
-                    });
-                }
-                else
-                {
-                    return this.BadRequest(new ResponseModel<string>()
-                    {
-                        Status = false,
-                        Message = "Password Not Matching"
-                    });
-                }
-
-            }catch(Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+       
     }
 }

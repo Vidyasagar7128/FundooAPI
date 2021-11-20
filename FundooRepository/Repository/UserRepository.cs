@@ -74,16 +74,21 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="loginDetails"></param>
         /// <returns></returns>
-        public RegisterModel Login(LoginModel loginDetails)
+        public string Login(LoginModel loginDetails)
         {
             try
             {
-                var encPassword = EncryptPassword(loginDetails.Password);
-                var checkUser = this._userContext.Users.Where(e => e.Email == loginDetails.Email && e.Password == encPassword).FirstOrDefault();
-                if (checkUser != null)
-                    return checkUser;
+                if (this._userContext.Users.Where(e => e.Email == loginDetails.Email).FirstOrDefault() != null)
+                {
+                    if (this._userContext.Users.Where(e => e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() != null)
+                        return "Login Succesful";
+                    else
+                        return "Password is not Matching";
+                }
+                else if (this._userContext.Users.Where(e => e.Email == loginDetails.Email || e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() == null)
+                    return "Email & Password are not Matching";
                 else
-                    return null;
+                    return "Email is not Matching";
             }
             catch(Exception e)
             {
@@ -107,37 +112,7 @@ namespace FundooRepository.Repository
         }
         public string ChangePassword()
         {
-            return "Hello ChangePassword method Calling";
-        }
-        /// <summary>
-        ///Change Password Using Password & Confirm Password
-        /// </summary>
-        /// <param name="forgotPassword"></param>
-        /// <returns></returns>
-        public string ChangePasswordUsingPassword(ForgotPassword forgotPassword)
-        {
-            try
-            {
-                if (forgotPassword.Password == forgotPassword.ConfirmPassword)
-                {
-                    var matchPassword = this._userContext.Users.Where(e => e.Password == forgotPassword.OldPassword).FirstOrDefault();
-                    if (matchPassword != null)
-                    {
-                        matchPassword.Password = forgotPassword.Password;
-                        this._userContext.Update(matchPassword);
-                        this._userContext.SaveChanges();
-                        return "Password Changed Succesfully!";
-                    }
-                    else
-                        return "Something went Wrong!";
-                }
-                else
-                    return "Password Not Matching";
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            return "Click that Link given in Email to change Password. Thank You! Team Fundoo App. ";
         }
     }
 }
