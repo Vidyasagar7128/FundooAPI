@@ -54,16 +54,11 @@ namespace FundooNotes.Controllers
                 List<NotesModel> result = await this._notesManager.ShowAllNotes();
                 if (result != null)
                 {
-                    return this.Ok(new ResponseModel<NotesModel>()
-                    {
-                        Status = true,
-                        Message = result.ToString(),
-                        //Data = result Error
-                    });
+                    return this.Ok(new { Status = true, Message = "Data is available", Data = result });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string> { Status = false, Message = result.ToString(),Data = null});
+                    return this.BadRequest(new ResponseModel<string> { Status = false, Message = result.ToString(), Data = null});
                 }
             }
             catch(Exception e)
@@ -131,5 +126,28 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Change Color of Note UI
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/color")]
+        public async Task<IActionResult> ChangeColors([FromBody] NotesModel notesModel)
+        {
+            try
+            {
+                var color = await this._notesManager.ChangeColor(notesModel);
+                if(color.Equals("Color Changed!"))
+                    return this.Ok(new { Status = true,Message = "Color Changed!"});
+                else
+                    return this.BadRequest(new { Status = true, Message = "Color Changed!" });
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        
     }
 }

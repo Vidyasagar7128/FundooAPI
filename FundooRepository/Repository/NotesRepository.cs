@@ -84,7 +84,7 @@ namespace FundooRepository.Repository
                     idCheck.Archive = notesModel.Archive;
                     idCheck.Pin = notesModel.Pin;
 
-                    this._userContext.Entry(idCheck).State = EntityState.Modified;
+                    this._userContext.Entry<NotesModel>(idCheck).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
                     return "Note Update Succesfully!";
                 }
@@ -111,6 +111,25 @@ namespace FundooRepository.Repository
                     return "Failed to Delete!";
             }
             catch (ArgumentNullException e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> Color(NotesModel notesModel)
+        {
+            try
+            {
+                var checkColor = this._userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if (checkColor != null)
+                {
+                    checkColor.Theme = notesModel.Theme;
+                    this._userContext.Entry<NotesModel>(checkColor).State = EntityState.Modified;
+                    await this._userContext.SaveChangesAsync();
+                    return "Color Changed!";
+                } else
+                    return "Failed to change Color!";
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }

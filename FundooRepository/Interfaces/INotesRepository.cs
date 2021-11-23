@@ -13,5 +13,6 @@ namespace FundooRepository.Interfaces
         Task<string> DeleteNote(string Id);
         Task<List<NotesModel>> ShowNotes();
         Task<string> UpdateNotes(NotesModel notesModel);
+        Task<string> Color(NotesModel notesModel);
     }
 }

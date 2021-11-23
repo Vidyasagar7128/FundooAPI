@@ -59,5 +59,16 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public async Task<string> ChangeColor(NotesModel notesModel)
+        {
+            try
+            {
+                return await this._notesRepository.Color(notesModel);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

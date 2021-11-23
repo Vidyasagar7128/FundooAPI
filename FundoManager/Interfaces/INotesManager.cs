@@ -10,5 +10,8 @@ namespace FundoManager.Interfaces
         Task<string> DeleteNotes(string Id);
         Task<List<NotesModel>> ShowAllNotes();
         Task<string> UpdateNote(NotesModel notesModel);
+        Task<string> ChangeColor(NotesModel notesModel);
     }
+    
+    
 }
