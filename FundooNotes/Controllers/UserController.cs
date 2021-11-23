@@ -1,4 +1,4 @@
-﻿using FundoManager.Interface;
+﻿using FundoManager.Interfaces;
 using FundooModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +22,7 @@ namespace FundooNotes.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/signup")]
-        public IActionResult Register([FromBody] RegisterModel userData)
+        public IActionResult Register([FromBody] SignUpModel userData)
         {
             try
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FundoManager.Interface;
+using FundoManager.Interfaces;
 using FundooModels;
 using FundooRepository.Interfaces;
 
@@ -14,7 +14,7 @@ namespace FundoManager.Manager
         {
             this._repository = repository;
         }
-        public string Register(RegisterModel userData)
+        public string Register(SignUpModel userData)
         {
             try
             {

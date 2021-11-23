@@ -5,10 +5,10 @@ using System.Text;
 
 namespace FundooModels
 {
-    public class RegisterModel
+    public class SignUpModel
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         [RegularExpression(@"^[a-zA-Z\s]{1,40}$",
          ErrorMessage = "Firstname is Invalid.")]

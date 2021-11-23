@@ -1,4 +1,5 @@
-﻿using FundooModels;
+﻿using Experimental.System.Messaging;
+using FundooModels;
 using FundooRepository.Context;
 using FundooRepository.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -26,18 +27,18 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="userModel"></param>
         /// <returns></returns>
-        public string Register(RegisterModel userModel)
+        public string Register(SignUpModel signupModel)
         {
             try
             {
-                var validEmail = this._userContext.Users.Where(x => x.Email == userModel.Email).FirstOrDefault();
+                var validEmail = this._userContext.Users.Where(x => x.Email == signupModel.Email).FirstOrDefault();
                 if (validEmail == null)
                 {
-                    if (userModel.FirstName != null && userModel.LastName != null && userModel.Email != null && userModel.Password != null)
+                    if (signupModel.FirstName != null && signupModel.LastName != null && signupModel.Email != null && signupModel.Password != null)
                     {
-                        var pass = EncryptPassword(userModel.Password);
-                        userModel.Password = pass;
-                        this._userContext.Add(userModel);
+                        var pass = EncryptPassword(signupModel.Password);
+                        signupModel.Password = pass;
+                        this._userContext.Users.Add(signupModel);
                         this._userContext.SaveChanges();
                         return "Registration Done!";
                     }

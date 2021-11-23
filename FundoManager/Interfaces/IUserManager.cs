@@ -1,10 +1,10 @@
 ﻿using FundooModels;
 
-namespace FundoManager.Interface
+namespace FundoManager.Interfaces
 {
     public interface IUserManager
     {
-        string Register(RegisterModel userData);
+        string Register(SignUpModel userData);
         string LoginUser(LoginModel login);
         string SendEmailResetPassword(string email);
     }
