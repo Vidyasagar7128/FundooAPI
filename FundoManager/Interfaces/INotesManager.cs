@@ -11,6 +11,7 @@ namespace FundoManager.Interfaces
         Task<List<NotesModel>> ShowAllNotes();
         Task<string> UpdateNote(NotesModel notesModel);
         Task<string> ChangeColor(NotesModel notesModel);
+        Task<string> CheckArchive(NotesModel notesModel);
     }
     
     

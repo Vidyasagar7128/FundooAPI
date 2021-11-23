@@ -148,6 +148,27 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
-        
+        /// <summary>
+        /// Check Archive Status Put into Archive and Remove from it.
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/archive")]
+        public async Task<IActionResult> ArchiveStatus([FromBody] NotesModel notesModel)
+        {
+            try
+            {
+                var color = await this._notesManager.CheckArchive(notesModel);
+                if (color.Equals("Archived!"))
+                    return this.Ok(new { Status = true, Message = "Archived!" });
+                else
+                    return this.BadRequest(new { Status = true, Message = "Failed to Archive!" });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

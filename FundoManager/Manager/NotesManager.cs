@@ -70,5 +70,16 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public async Task<string> CheckArchive(NotesModel notesModel)
+        {
+            try
+            {
+                return await this._notesRepository.Archive(notesModel);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

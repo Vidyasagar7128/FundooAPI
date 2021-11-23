@@ -134,5 +134,25 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        public async Task<string> Archive(NotesModel notesModel)
+        {
+            try
+            {
+                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if(checkArchive != null)
+                {
+                    checkArchive.Archive = notesModel.Archive;
+                    this._userContext.Entry<NotesModel>(checkArchive).State = EntityState.Modified;
+                    await this._userContext.SaveChangesAsync();
+                    return "Archived!";
+                }
+                else
+                    return "Failed to Archive!";
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
