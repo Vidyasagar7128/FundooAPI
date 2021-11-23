@@ -120,7 +120,8 @@ namespace FundooRepository.Repository
                 mail.From = new MailAddress(this.Configuration.GetValue<string>("EmailId"));
                 mail.To.Add(email);
                 mail.Subject = "[FunDoo] Password Reset Link";
-                mail.Body = "Do you want to change your Password!";
+                SendMSMailQueue();
+                mail.Body = GetMSMailQueue();
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com",587);
                 smtpClient.Credentials = new System.Net.NetworkCredential(this.Configuration.GetValue<string>("EmailId"),this.Configuration.GetValue<string>("Password"));
                 smtpClient.EnableSsl = true;
@@ -131,6 +132,23 @@ namespace FundooRepository.Repository
             {
                 throw new Exception(e.Message);
             }
+        }
+        private void SendMSMailQueue()
+        {
+            MessageQueue messageQueue;
+            if (MessageQueue.Exists(@".\Private$\FundooNotes"))
+                messageQueue = new MessageQueue(@".\Private$\FundooNotes");
+            else
+                messageQueue = MessageQueue.Create(@".\Private$\FundooNotes");
+            messageQueue.Label = "MsMq";
+            string body = "Do you want to change your Password!";
+            messageQueue.Send(body);
+        }
+        private string GetMSMailQueue()
+        {
+            var queue = new MessageQueue(@".\Private$\FundooNotes");
+            var received = queue.Receive();
+            return received.ToString();
         }
     }
 }
