@@ -154,5 +154,30 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Pin or Unpin from Task
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
+        public async Task<string> Pin(NotesModel notesModel)
+        {
+            try
+            {
+                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if (checkArchive != null)
+                {
+                    checkArchive.Pin = notesModel.Pin;
+                    this._userContext.Entry<NotesModel>(checkArchive).State = EntityState.Modified;
+                    await this._userContext.SaveChangesAsync();
+                    return "Pinned!";
+                }
+                else
+                    return "Failed to Pin!";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

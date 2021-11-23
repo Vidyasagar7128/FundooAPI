@@ -170,5 +170,22 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
+        [HttpPut]
+        [Route("api/pin")]
+        public async Task<IActionResult> PinStatus([FromBody] NotesModel notesModel)
+        {
+            try
+            {
+                var color = await this._notesManager.CheckPin(notesModel);
+                if (color.Equals("Pinned!"))
+                    return this.Ok(new { Status = true, Message = "Pinned!" });
+                else
+                    return this.BadRequest(new { Status = true, Message = "Failed to Pin!" });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

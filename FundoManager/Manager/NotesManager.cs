@@ -81,5 +81,16 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public async Task<string> CheckPin(NotesModel notesModel)
+        {
+            try
+            {
+                return await this._notesRepository.Pin(notesModel);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
