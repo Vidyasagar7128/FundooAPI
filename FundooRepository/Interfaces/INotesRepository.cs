@@ -16,5 +16,7 @@ namespace FundooRepository.Interfaces
         Task<string> Color(NotesModel notesModel);
         Task<string> Archive(NotesModel notesModel);
         Task<string> Pin(NotesModel notesModel);
+        Task<string> Trash(NotesModel notesModel);
+        Task<List<NotesModel>> ShowArchiveNotes(long Id);
     }
 }

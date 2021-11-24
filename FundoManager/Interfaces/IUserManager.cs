@@ -5,7 +5,7 @@ namespace FundoManager.Interfaces
     public interface IUserManager
     {
         string Register(SignUpModel userData);
-        string LoginUser(LoginModel login);
+        object LoginUser(LoginModel login);
         string SendEmailResetPassword(string email);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FundooModels
@@ -15,9 +16,11 @@ namespace FundooModels
         public string Reminder { get; set; }
         [DefaultValue("white")]
         public string Theme { get; set; }
-        [DefaultValue("false")]
-        public bool Archive { get; set; }
+        [DefaultValue(0)]
+        public int Status { get; set; }
         [DefaultValue("false")]
         public bool Pin { get; set; }
+        [ForeignKey("UserId")]
+        public long UserId { get; set; }
     }
 }

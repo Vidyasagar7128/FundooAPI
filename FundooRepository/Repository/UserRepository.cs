@@ -3,12 +3,16 @@ using FundooModels;
 using FundooRepository.Context;
 using FundooRepository.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FundooRepository.Repository
 {
@@ -76,27 +80,57 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="loginDetails"></param>
         /// <returns></returns>
-        public string Login(LoginModel loginDetails)
+        public object Login(LoginModel loginDetails)
         {
             try
             {
                 if (this._userContext.Users.Where(e => e.Email == loginDetails.Email).FirstOrDefault() != null)
                 {
                     if (this._userContext.Users.Where(e => e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() != null)
-                        return "Login Succesful";
+                    {
+                        string token = JwtToken(loginDetails.Email);
+
+                        return new { Status = true, Message = "Login Succesfull.", Token = token };
+                    }
                     else
-                        return "Password is not Matching";
+                        return new { Status = false, Message = "Incorrect Password." };
                 }
                 else if (this._userContext.Users.Where(e => e.Email == loginDetails.Email || e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() == null)
-                    return "Email & Password are not Matching";
+                    return new { Status = false, Message = "Email & Password are not Matching." };
                 else
-                    return "Email is not Matching";
+                    return new { Status = false, Message = "Email is not Matching." };
             }
             catch(Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// JWT Token Generate
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public string JwtToken(string Email)
+        {
+            byte[] key = Encoding.UTF8.GetBytes(Configuration["SecretKey"]);
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
+            SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] {
+                      new Claim(ClaimTypes.Name, Email)}),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(securityKey,
+                SecurityAlgorithms.HmacSha256Signature)
+            };
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(descriptor);
+            return handler.WriteToken(token);
+        }
+        /// <summary>
+        /// Send Email to Forget Password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public string SendEmailforResetPassword(string email)
         {
             try

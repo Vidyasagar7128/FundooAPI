@@ -25,7 +25,7 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
-        public string LoginUser(LoginModel loginDetails)
+        public object LoginUser(LoginModel loginDetails)
         {
             try
             {

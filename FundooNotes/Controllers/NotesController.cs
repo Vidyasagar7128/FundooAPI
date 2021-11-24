@@ -187,5 +187,39 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
+        [HttpPost]
+        [Route("api/trash")]
+        public async Task<IActionResult> TrashNotes([FromBody] NotesModel notesModel)
+        {
+            try
+            {
+                var result = await _notesManager.TrashNote(notesModel);
+                if (result.Equals("Moved to Trash!"))
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
+                else
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        [HttpGet]
+        [Route("api/archive")]
+        public async Task<IActionResult> ShowArchive([FromQuery] long Id)
+        {
+            try
+            {
+                List<NotesModel> result = await _notesManager.ArchiveNotes(Id);
+                if (result != null)
+                    return Ok(new { Status = true, Message = "Data is available", Data = result });
+                else
+                    return BadRequest(new ResponseModel<string>() { Status = false, Message = "Archive is Empty" });
+            }
+            catch(Exception e)
+            {
+                return NotFound( new { Status = false, Message = e.Message });
+            }
+        }
     }
 }

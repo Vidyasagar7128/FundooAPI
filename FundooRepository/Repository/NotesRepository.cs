@@ -81,7 +81,7 @@ namespace FundooRepository.Repository
                     idCheck.Body = notesModel.Body;
                     idCheck.Reminder = notesModel.Reminder;
                     idCheck.Theme = notesModel.Theme;
-                    idCheck.Archive = notesModel.Archive;
+                    idCheck.Status = notesModel.Status;
                     idCheck.Pin = notesModel.Pin;
 
                     this._userContext.Entry<NotesModel>(idCheck).State = EntityState.Modified;
@@ -141,7 +141,7 @@ namespace FundooRepository.Repository
                 var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
                 if(checkArchive != null)
                 {
-                    checkArchive.Archive = notesModel.Archive;
+                    checkArchive.Status = 1;
                     this._userContext.Entry<NotesModel>(checkArchive).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
                     return "Archived!";
@@ -163,11 +163,11 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
-                if (checkArchive != null)
+                var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if (checkPin != null)
                 {
-                    checkArchive.Pin = notesModel.Pin;
-                    this._userContext.Entry<NotesModel>(checkArchive).State = EntityState.Modified;
+                    checkPin.Pin = notesModel.Pin;
+                    this._userContext.Entry<NotesModel>(checkPin).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
                     return "Pinned!";
                 }
@@ -175,6 +175,40 @@ namespace FundooRepository.Repository
                     return "Failed to Pin!";
             }
             catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> Trash(NotesModel notesModel)
+        {
+            try
+            {
+                var checkStatus = _userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if(checkStatus != null)
+                {
+                    checkStatus.Status = 2;
+                    _userContext.Entry(checkStatus).State = EntityState.Modified;
+                    await _userContext.SaveChangesAsync();
+                    return "Moved to Trash!";
+                }else
+                    return "Failed to Move Trash!";
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<List<NotesModel>> ShowArchiveNotes(long Id)
+        {
+            try
+            {
+                var checkStatus = _userContext.Notes.Where(e => e.UserId == Id).Count();
+                if(checkStatus >= 1)
+                    return await _userContext.Notes.Where(e => e.Status == 1).ToListAsync();
+                 else
+                    throw new ArgumentNullException("No Archive Notes!");
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }

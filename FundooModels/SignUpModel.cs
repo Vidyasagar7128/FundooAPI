@@ -8,7 +8,7 @@ namespace FundooModels
     public class SignUpModel
     {
         [Key]
-        public long Id { get; set; }
+        public long UserId { get; set; }
         [Required]
         [RegularExpression(@"^[a-zA-Z\s]{1,40}$",
          ErrorMessage = "Firstname is Invalid.")]
@@ -18,7 +18,7 @@ namespace FundooModels
           ErrorMessage = "Lastname is Invalid.")]
         public string LastName { get; set; }
         [Required]
-        [RegularExpression(@"^[a-z]+[0-9]+[@]+[a-z]+[.]+[a-z]{3}$",
+        [RegularExpression(@"^[a-z]+[0-9]?[@]+[a-z]+[.]+[a-z]{3}$",
           ErrorMessage = "Email is Invalid.")]
         public string Email { get; set; }
         [Required]

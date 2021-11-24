@@ -75,21 +75,13 @@ namespace FundooNotes.Controllers
             try
             {
                 var result = this._userManager.LoginUser(loginDetails);
-                if (result.Equals("Login Succesful"))
+                if (result.Equals("Login Succesfull."))
                 {
-                    return this.Ok(new ResponseModel<string>()
-                    {
-                        Status = true,
-                        Message = result
-                    });
+                    return this.Ok(result);
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>()
-                    {
-                        Status = false,
-                        Message = result
-                    });
+                    return this.BadRequest(result);
                 }
             }
             catch(Exception e)

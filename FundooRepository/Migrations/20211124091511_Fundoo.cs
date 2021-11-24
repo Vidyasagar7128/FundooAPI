@@ -2,7 +2,7 @@
 
 namespace FundooRepository.Migrations
 {
-    public partial class Fundo : Migration
+    public partial class Fundoo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,8 +16,9 @@ namespace FundooRepository.Migrations
                     Body = table.Column<string>(nullable: true),
                     Reminder = table.Column<string>(nullable: true),
                     Theme = table.Column<string>(nullable: true),
-                    Archive = table.Column<bool>(nullable: false),
-                    Pin = table.Column<bool>(nullable: false)
+                    Status = table.Column<int>(nullable: false),
+                    Pin = table.Column<bool>(nullable: false),
+                    UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +29,7 @@ namespace FundooRepository.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    UserId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
@@ -37,7 +38,7 @@ namespace FundooRepository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
         }
 
