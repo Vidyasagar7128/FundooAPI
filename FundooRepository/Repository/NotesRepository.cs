@@ -179,6 +179,11 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Move to Trash Notes
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
         public async Task<string> Trash(NotesModel notesModel)
         {
             try
@@ -198,6 +203,11 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Show Archive Notes
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
         public async Task<List<NotesModel>> ShowArchiveNotes(long Id)
         {
             try
@@ -209,6 +219,26 @@ namespace FundooRepository.Repository
                     throw new ArgumentNullException("No Archive Notes!");
             }
             catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// Trash Notes
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<List<NotesModel>> ShowTrashNotes(long Id)
+        {
+            try
+            {
+                var checkStatus = _userContext.Notes.Where(e => e.UserId == Id).Count();
+                if (checkStatus >= 1)
+                    return await _userContext.Notes.Where(e => e.Status == 2).ToListAsync();
+                else
+                    throw new ArgumentNullException("Trash is Empty!");
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

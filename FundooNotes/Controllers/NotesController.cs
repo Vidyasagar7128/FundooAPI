@@ -187,7 +187,7 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
-        [HttpPost]
+        [HttpPut]
         [Route("api/trash")]
         public async Task<IActionResult> TrashNotes([FromBody] NotesModel notesModel)
         {
@@ -219,6 +219,23 @@ namespace FundooNotes.Controllers
             catch(Exception e)
             {
                 return NotFound( new { Status = false, Message = e.Message });
+            }
+        }
+        [HttpPut]
+        [Route("api/trashlist")]
+        public async Task<IActionResult> ShowTrash([FromQuery] long Id)
+        {
+            try
+            {
+                List<NotesModel> result = await _notesManager.TrashNotes(Id);
+                if(result != null)
+                    return Ok(new { Status = true, Message = "Trash Data", Data = result });
+                else
+                    return BadRequest(new { Status = false, Message = "Trash is Empty" });
+            }
+            catch(Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
     }

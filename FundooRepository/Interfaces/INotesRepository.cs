@@ -18,5 +18,6 @@ namespace FundooRepository.Interfaces
         Task<string> Pin(NotesModel notesModel);
         Task<string> Trash(NotesModel notesModel);
         Task<List<NotesModel>> ShowArchiveNotes(long Id);
+        Task<List<NotesModel>> ShowTrashNotes(long Id);
     }
 }

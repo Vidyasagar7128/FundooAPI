@@ -114,5 +114,16 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public async Task<List<NotesModel>> TrashNotes(long Id)
+        {
+            try
+            {
+                return await _notesRepository.ShowTrashNotes(Id);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

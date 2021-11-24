@@ -15,6 +15,7 @@ namespace FundoManager.Interfaces
         Task<string> CheckPin(NotesModel notesModel);
         Task<string> TrashNote(NotesModel notesModel);
         Task<List<NotesModel>> ArchiveNotes(long Id);
+        Task<List<NotesModel>> TrashNotes(long Id);
     }
     
     
