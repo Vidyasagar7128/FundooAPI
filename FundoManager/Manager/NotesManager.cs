@@ -59,6 +59,17 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public async Task<string> BackNotes(NotesModel notesModel)
+        {
+            try
+            {
+                return await _notesRepository.RestoreNote(notesModel);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public async Task<string> ChangeColor(NotesModel notesModel)
         {
             try

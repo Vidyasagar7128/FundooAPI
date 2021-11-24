@@ -96,6 +96,11 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Delete Permenantly
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<string> DeleteNote(string Id)
         {
             try
@@ -109,6 +114,32 @@ namespace FundooRepository.Repository
                 }
                 else
                     return "Failed to Delete!";
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// Restore from Trash 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<string> RestoreNote(NotesModel notesModel)
+        {
+            try
+            {
+                var checkId = this._userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                if (checkId != null)
+                {
+                    checkId.Status = checkId.Status == 2 ? 0 : 2;
+                    checkId.Pin = checkId.Pin == true ? false : false;
+                    _userContext.Entry(checkId).State = EntityState.Modified;
+                    await _userContext.SaveChangesAsync();
+                    return "Note Restored Succesfully!";
+                }
+                else
+                    return "Failed to Restore!";
             }
             catch (ArgumentNullException e)
             {
@@ -141,7 +172,8 @@ namespace FundooRepository.Repository
                 var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
                 if(checkArchive != null)
                 {
-                    checkArchive.Status = 1;
+                    checkArchive.Status = checkArchive.Status == 0 ? 1 : 0;
+                    checkArchive.Pin = checkArchive.Pin == true ? false : false;
                     this._userContext.Entry<NotesModel>(checkArchive).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
                     return "Archived!";
@@ -166,7 +198,8 @@ namespace FundooRepository.Repository
                 var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
                 if (checkPin != null)
                 {
-                    checkPin.Pin = notesModel.Pin;
+                    checkPin.Pin = notesModel.Pin == true ? false : true;
+                    checkPin.Status = checkPin.Status == 1 ? 0 : 0;
                     this._userContext.Entry<NotesModel>(checkPin).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
                     return "Pinned!";
@@ -192,6 +225,7 @@ namespace FundooRepository.Repository
                 if(checkStatus != null)
                 {
                     checkStatus.Status = 2;
+                    checkStatus.Pin = false;
                     _userContext.Entry(checkStatus).State = EntityState.Modified;
                     await _userContext.SaveChangesAsync();
                     return "Moved to Trash!";

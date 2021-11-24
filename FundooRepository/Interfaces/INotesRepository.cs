@@ -19,5 +19,6 @@ namespace FundooRepository.Interfaces
         Task<string> Trash(NotesModel notesModel);
         Task<List<NotesModel>> ShowArchiveNotes(long Id);
         Task<List<NotesModel>> ShowTrashNotes(long Id);
+        Task<string> RestoreNote(NotesModel notesModel);
     }
 }

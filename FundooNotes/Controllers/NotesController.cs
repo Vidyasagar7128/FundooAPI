@@ -96,6 +96,11 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Delete Note Permenantly
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("api/delete")]
         public async Task<IActionResult> DeleteNote([FromQuery] string Id)
@@ -124,6 +129,40 @@ namespace FundooNotes.Controllers
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// Restore Notes from Trash
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/restore")]
+        public async Task<IActionResult> RestoreNote([FromBody] NotesModel notesModel)
+        {
+            try
+            {
+                var result = await this._notesManager.BackNotes(notesModel);
+                if (result.Equals("Note Restored Succesfully!"))
+                {
+                    return this.Ok(new ResponseModel<string>()
+                    {
+                        Status = true,
+                        Message = "Note Restored Succesfully!",
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>()
+                    {
+                        Status = false,
+                        Message = result,
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = e.Message });
             }
         }
         /// <summary>

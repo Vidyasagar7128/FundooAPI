@@ -16,6 +16,7 @@ namespace FundoManager.Interfaces
         Task<string> TrashNote(NotesModel notesModel);
         Task<List<NotesModel>> ArchiveNotes(long Id);
         Task<List<NotesModel>> TrashNotes(long Id);
+        Task<string> BackNotes(NotesModel notesModel);
     }
     
     
