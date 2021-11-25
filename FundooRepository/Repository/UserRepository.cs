@@ -4,6 +4,7 @@ using FundooRepository.Context;
 using FundooRepository.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -80,7 +81,7 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="loginDetails"></param>
         /// <returns></returns>
-        public object Login(LoginModel loginDetails)
+        public string Login(LoginModel loginDetails)
         {
             try
             {
@@ -88,17 +89,20 @@ namespace FundooRepository.Repository
                 {
                     if (this._userContext.Users.Where(e => e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() != null)
                     {
-                        string token = JwtToken(loginDetails.Email);
-
-                        return new { Status = true, Message = "Login Succesfull.", Token = token };
+                        var user = _userContext.Users.Where(e => e.Email == loginDetails.Email && e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault();
+                        ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                        IDatabase database = connectionMultiplexer.GetDatabase();
+                        database.StringSet(key: "Firstname", user.FirstName);
+                        database.StringSet(key: "Lastname", user.LastName);
+                        return "Login Succesfull.";
                     }
                     else
-                        return new { Status = false, Message = "Incorrect Password." };
+                        return "Incorrect Password.";
                 }
                 else if (this._userContext.Users.Where(e => e.Email == loginDetails.Email || e.Password == EncryptPassword(loginDetails.Password)).FirstOrDefault() == null)
-                    return new { Status = false, Message = "Email & Password are not Matching." };
+                    return "Email & Password are not Matching.";
                 else
-                    return new { Status = false, Message = "Email is not Matching." };
+                    return "Email is not Matching.";
             }
             catch(Exception e)
             {

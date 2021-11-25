@@ -1,6 +1,7 @@
 ﻿using FundoManager.Interfaces;
 using FundooModels;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,11 +78,17 @@ namespace FundooNotes.Controllers
                 var result = this._userManager.LoginUser(loginDetails);
                 if (result.Equals("Login Succesfull."))
                 {
-                    return this.Ok(result);
+                    ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                    IDatabase database = connectionMultiplexer.GetDatabase();
+
+                    string firstName = database.StringGet("Firstname");
+                    string lastName = database.StringGet("Lastname");
+                    SignUpModel data = new SignUpModel { FirstName = firstName, LastName = lastName, Email = loginDetails.Email };
+                    return this.Ok(new { Status = true, Data = data, Token = _userManager.GetJwtToken(loginDetails.Email) });
                 }
                 else
                 {
-                    return this.BadRequest(result);
+                    return this.BadRequest(new { Status = false, Message = "Something went Wrong!" });
                 }
             }
             catch(Exception e)

@@ -8,7 +8,8 @@ namespace FundooRepository.Interfaces
         IConfiguration Configuration { get; }
 
         string Register(SignUpModel signupModel);
-        object Login(LoginModel loginModel);
+        string Login(LoginModel loginModel);
         string SendEmailforResetPassword(string email);
+        string JwtToken(string Email);
     }
 }

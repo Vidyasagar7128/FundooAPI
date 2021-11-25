@@ -1,5 +1,6 @@
 ﻿using FundoManager.Interfaces;
 using FundooModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
+    [Authorize]
     public class NotesController : Controller
     {
         private readonly INotesManager _notesManager;
