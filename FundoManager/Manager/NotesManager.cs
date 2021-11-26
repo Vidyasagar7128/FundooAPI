@@ -1,6 +1,7 @@
 ﻿using FundoManager.Interfaces;
 using FundooModels;
 using FundooRepository.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +21,17 @@ namespace FundoManager.Manager
             try
             {
                 return await this._notesRepository.AddNote(notesModel);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public string AddImage(IFormFile file)
+        {
+            try
+            {
+                return this._notesRepository.UploadImg(file);
             }
             catch (Exception e)
             {

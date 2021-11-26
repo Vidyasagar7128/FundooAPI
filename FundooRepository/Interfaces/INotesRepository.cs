@@ -1,4 +1,5 @@
 ﻿using FundooModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,5 +21,6 @@ namespace FundooRepository.Interfaces
         Task<List<NotesModel>> ShowArchiveNotes(long Id);
         Task<List<NotesModel>> ShowTrashNotes(long Id);
         Task<string> RestoreNote(NotesModel notesModel);
+        string UploadImg(IFormFile file);
     }
 }

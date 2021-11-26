@@ -25,7 +25,7 @@ namespace FundooRepository.Repository
             {
                 foreach (var email in Emails)
                 {
-                    var checkEmail = _userContext.Users.Where(e => e.Email == email).Select(x => x.Email).FirstOrDefault();
+                    var checkEmail = _userContext.Users.Where(e => e.Email == email).Select(x => x.Email);
                     if (checkEmail != null)
                     {
                         return "Collaborator Note Done!";

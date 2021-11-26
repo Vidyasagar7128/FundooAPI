@@ -1,4 +1,5 @@
 ﻿using FundooModels;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace FundoManager.Interfaces
         Task<List<NotesModel>> ArchiveNotes(long Id);
         Task<List<NotesModel>> TrashNotes(long Id);
         Task<string> BackNotes(NotesModel notesModel);
+        string AddImage(IFormFile file);
     }
     
     

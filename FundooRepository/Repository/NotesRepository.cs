@@ -1,6 +1,9 @@
-﻿using FundooModels;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using FundooModels;
 using FundooRepository.Context;
 using FundooRepository.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -64,6 +67,33 @@ namespace FundooRepository.Repository
             }
         }
         /// <summary>
+        /// Upload Image
+        /// </summary>
+        /// <returns></returns>
+        public string UploadImg(IFormFile file)
+        {
+            try
+            {
+                if (file != null)
+                {
+                    var myAccount = new Account { ApiKey = Configuration.GetConnectionString("Cloudinary:ApiKey"), ApiSecret = Configuration.GetConnectionString("Cloudinary:ApiSecret"), Cloud = Configuration.GetConnectionString("Cloudinary:CloudName") };
+                    Cloudinary cloudinary = new Cloudinary(myAccount);
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.FileName, file.OpenReadStream())
+                    };
+                    var uploadResult = cloudinary.Upload(uploadParams);
+                    return uploadResult.ToString();
+                }
+                else
+                    return "Something went Wrong!";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
         /// Update Notes
         /// </summary>
         /// <param name="Id"></param>
@@ -73,7 +103,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var idCheck =this._userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var idCheck =this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if (idCheck != null)
                 {
                     idCheck.Title = notesModel.Title;
@@ -104,7 +134,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkId = this._userContext.Notes.Where(e => e.NotesId.ToString().Equals(Id)).FirstOrDefault();
+                var checkId = this._userContext.Notes.Where(e => e.NoteId.ToString().Equals(Id)).FirstOrDefault();
                 if (checkId != null)
                 {
                     this._userContext.Notes.Remove(checkId);
@@ -128,7 +158,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkId = this._userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var checkId = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if (checkId != null)
                 {
                     checkId.Status = checkId.Status == 2 ? 0 : 2;
@@ -149,7 +179,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkColor = this._userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var checkColor = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if (checkColor != null)
                 {
                     checkColor.Theme = notesModel.Theme;
@@ -168,7 +198,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if(checkArchive != null)
                 {
                     checkArchive.Status = checkArchive.Status == 0 ? 1 : 0;
@@ -194,10 +224,10 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if (checkPin != null)
                 {
-                    checkPin.Pin = notesModel.Pin == true ? false : true;
+                    checkPin.Pin = checkPin.Pin == false ? true : false;
                     checkPin.Status = checkPin.Status == 1 ? 0 : 0;
                     this._userContext.Entry<NotesModel>(checkPin).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
@@ -220,10 +250,10 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkStatus = _userContext.Notes.Where(e => e.NotesId == notesModel.NotesId).FirstOrDefault();
+                var checkStatus = _userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
                 if(checkStatus != null)
                 {
-                    checkStatus.Status = 2;
+                    checkStatus.Status = checkStatus.Status == 2 ? 0 : 2;
                     checkStatus.Pin = false;
                     _userContext.Entry(checkStatus).State = EntityState.Modified;
                     await _userContext.SaveChangesAsync();

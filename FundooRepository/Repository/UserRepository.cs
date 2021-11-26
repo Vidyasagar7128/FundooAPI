@@ -94,6 +94,7 @@ namespace FundooRepository.Repository
                         IDatabase database = connectionMultiplexer.GetDatabase();
                         database.StringSet(key: "Firstname", user.FirstName);
                         database.StringSet(key: "Lastname", user.LastName);
+                        database.StringSet(key: "UserId",user.UserId.ToString());
                         return "Login Succesfull.";
                     }
                     else

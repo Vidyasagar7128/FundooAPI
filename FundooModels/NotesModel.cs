@@ -10,7 +10,7 @@ namespace FundooModels
     public class NotesModel
     {
         [Key]
-        public long NotesId { get; set; }
+        public long NoteId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
         public string Reminder { get; set; }
@@ -20,7 +20,8 @@ namespace FundooModels
         public int Status { get; set; }
         [DefaultValue("false")]
         public bool Pin { get; set; }
-        [ForeignKey("UserId")]
         public long UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual SignUpModel User { get; set; }
     }
 }

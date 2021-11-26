@@ -1,6 +1,9 @@
-﻿using FundoManager.Interfaces;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using FundoManager.Interfaces;
 using FundooModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -45,6 +48,23 @@ namespace FundooNotes.Controllers
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+        [HttpPost]
+        [Route("api/image")]
+        public IActionResult UploadImage([FromBody] IFormFile file)
+        {
+            try
+            {
+                var result = _notesManager.AddImage(file);
+                if (result == "Something went Wrong!")
+                    return BadRequest(new { Status = false, Message = result });
+                else
+                    return Ok(new { Status = true, Message = result });
+            }
+            catch(Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpGet]
