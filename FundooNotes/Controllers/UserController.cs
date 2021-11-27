@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly IUserManager _userManager;
@@ -22,7 +24,7 @@ namespace FundooNotes.Controllers
         /// <param name="userData"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/signup")]
+        [Route("signup")]
         public IActionResult Register([FromBody] SignUpModel userData)
         {
             try
@@ -70,7 +72,7 @@ namespace FundooNotes.Controllers
         /// <param name="loginDetails"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/login")]
+        [Route("login")]
         public IActionResult LogIn([FromBody] LoginModel loginDetails)
         {
             try
@@ -101,7 +103,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPost]
-        [Route("api/forgetpassword")]
+        [Route("forgetpassword")]
         public IActionResult ForgetPasswordSendEmail([FromBody] string email)
         {
             try
@@ -133,6 +135,22 @@ namespace FundooNotes.Controllers
                 });
             }
         }
-       
+        [HttpPut]
+        [Route("resetpassword")]
+        public async Task<IActionResult> PasswordReset([FromBody] ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                var result = await _userManager.ResetPass(resetPasswordModel);
+                if (result.Equals("Password Changed!"))
+                    return Ok(new { Status = true,Message = result });
+                else
+                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
+            }
+            catch(Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
+            }
+        }
     }
 }

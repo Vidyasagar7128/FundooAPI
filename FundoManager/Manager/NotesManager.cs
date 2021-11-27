@@ -11,7 +11,7 @@ namespace FundoManager.Manager
 {
     public class NotesManager : INotesManager
     {
-        private INotesRepository _notesRepository;
+        private readonly INotesRepository _notesRepository;
         public NotesManager(INotesRepository notesRepository)
         {
             this._notesRepository = notesRepository;

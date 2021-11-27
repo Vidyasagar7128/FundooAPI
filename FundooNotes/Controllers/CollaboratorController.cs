@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
+    //[Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorManager _collaboratorManager;
@@ -16,7 +19,7 @@ namespace FundooNotes.Controllers
             _collaboratorManager = collaboratorManager;
         }
         [HttpPost]
-        [Route("api/collaborator")]
+        [Route("add")]
         public async Task<IActionResult> CreateCb([FromBody] NoteShareModel noteShareModel)
         {
             try

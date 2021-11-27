@@ -10,7 +10,7 @@ namespace FundoManager.Manager
 {
     public class LabelManager : ILabelManager
     {
-        private ILabelRepository _labelRepository;
+        private readonly ILabelRepository _labelRepository;
         public LabelManager(ILabelRepository labelRepository)
         {
             _labelRepository = labelRepository;

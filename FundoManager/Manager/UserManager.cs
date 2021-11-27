@@ -10,7 +10,7 @@ namespace FundoManager.Manager
 {
     public class UserManager : IUserManager
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repository;
         public UserManager(IUserRepository repository)
         {
             this._repository = repository;
@@ -54,6 +54,17 @@ namespace FundoManager.Manager
                 return this._repository.SendEmailforResetPassword(email);
             }
             catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> ResetPass(ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                return await this._repository.ResetPassword(resetPasswordModel);
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LabelController : Controller
     {
-        private ILabelManager _labelManager;
+        private readonly ILabelManager _labelManager;
         public LabelController(ILabelManager labelManager)
         {
             _labelManager = labelManager;
         }
         [HttpPost]
-        [Route("label")]
+        [Route("add")]
         public async Task<IActionResult> Add([FromBody] LabelStatusModel labelStatusModel)
         {
             try
@@ -37,7 +37,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpDelete]
-        [Route("api/label")]
+        [Route("delete")]
         public async Task<IActionResult> DeleteLabel([FromBody] LabelStatusModel labelStatusModel)
         {
             try
@@ -54,7 +54,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPost]
-        [Route("api/labels")]
+        [Route("labels")]
         public async Task<IActionResult> LabelsList([FromBody] long UserId)
         {
             try
@@ -72,7 +72,7 @@ namespace FundooNotes.Controllers
         }
 
         [HttpPost]
-        [Route("api/labeldata")]
+        [Route("list")]
         public IActionResult LabelsDataList([FromBody] int UserId)
         {
             try

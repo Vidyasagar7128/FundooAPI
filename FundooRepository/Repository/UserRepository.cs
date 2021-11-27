@@ -2,6 +2,7 @@
 using FundooModels;
 using FundooRepository.Context;
 using FundooRepository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
@@ -188,6 +189,29 @@ namespace FundooRepository.Repository
             var queue = new MessageQueue(@".\Private$\FundooNotes");
             var received = queue.Receive();
             return received.ToString();
+        }
+        public async Task<string> ResetPassword(ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                var checkPass = _userContext.Users.Where(e => e.Password == EncryptPassword(resetPasswordModel.OldPassword)).FirstOrDefault();
+                if (resetPasswordModel.Password == resetPasswordModel.ConfirmPassword)
+                {
+                    if (checkPass != null)
+                    {
+                        string newPass = EncryptPassword(resetPasswordModel.Password);
+                        checkPass.Password = newPass;
+                        _userContext.Entry(checkPass).State = EntityState.Modified;
+                        await _userContext.SaveChangesAsync();
+                        return "Password Changed!";
+                    }else
+                        return "Something went Wrong!";
+                } else
+                    return "Password and Confirm Password not Matching!";
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
