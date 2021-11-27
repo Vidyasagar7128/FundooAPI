@@ -138,11 +138,11 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<string> DeleteNote(string Id)
+        public async Task<string> DeleteNote(long NoteId, long UserId)
         {
             try
             {
-                var checkId = this._userContext.Notes.Where(e => e.NoteId.ToString().Equals(Id)).FirstOrDefault();
+                var checkId = this._userContext.Notes.Where(e => e.NoteId == NoteId && e.UserId == UserId).FirstOrDefault();
                 if (checkId != null)
                 {
                     this._userContext.Notes.Remove(checkId);

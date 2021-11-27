@@ -127,11 +127,11 @@ namespace FundooNotes.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteNote([FromQuery] string Id)
+        public async Task<IActionResult> DeleteNote(long NoteId, long UserId)
         {
             try
             {
-                var result = await this._notesManager.DeleteNotes(Id);
+                var result = await this._notesManager.DeleteNotes(NoteId, UserId);
                 if (result.Equals("Note Deleted Succesfully!"))
                 {
                     return this.Ok(new ResponseModel<string>()

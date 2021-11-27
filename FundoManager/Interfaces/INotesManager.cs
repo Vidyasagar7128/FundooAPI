@@ -8,7 +8,7 @@ namespace FundoManager.Interfaces
     public interface INotesManager
     {
         Task<string> AddNewNote(NotesModel notesModel);
-        Task<string> DeleteNotes(string Id);
+        Task<string> DeleteNotes(long NoteId, long UserId);
         Task<List<NotesModel>> ShowAllNotes(long UserId);
         Task<string> UpdateNote(NotesModel notesModel);
         Task<string> ChangeColor(NotesModel notesModel);

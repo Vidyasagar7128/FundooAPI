@@ -11,7 +11,7 @@ namespace FundooRepository.Interfaces
         IConfiguration Configuration { get; set; }
 
         Task<string> AddNote(NotesModel notes);
-        Task<string> DeleteNote(string Id);
+        Task<string> DeleteNote(long NoteId, long UserId);
         Task<List<NotesModel>> ShowNotes(long UserId);
         Task<string> UpdateNotes(NotesModel notesModel);
         Task<string> Color(NotesModel notesModel);

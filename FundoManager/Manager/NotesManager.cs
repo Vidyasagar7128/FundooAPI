@@ -60,11 +60,11 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
-        public async Task<string> DeleteNotes(string Id)
+        public async Task<string> DeleteNotes(long NoteId, long UserId)
         {
             try
             {
-                return await this._notesRepository.DeleteNote(Id);
+                return await this._notesRepository.DeleteNote(NoteId, UserId);
             }
             catch (Exception e)
             {
