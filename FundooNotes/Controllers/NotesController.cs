@@ -260,7 +260,7 @@ namespace FundooNotes.Controllers
                 if (result.Equals("Moved to Trash!"))
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = result });
                 else
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = result });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to Move Trash!" });
             }
             catch(Exception e)
             {
@@ -284,14 +284,14 @@ namespace FundooNotes.Controllers
                 return NotFound( new { Status = false, Message = e.Message });
             }
         }
-        [HttpPut]
+        [HttpGet]
         [Route("trashlist")]
-        public async Task<IActionResult> ShowTrash([FromQuery] long Id)
+        public async Task<IActionResult> ShowTrash(long UserId)
         {
             try
             {
-                List<NotesModel> result = await _notesManager.TrashNotes(Id);
-                if(result != null)
+                List<NotesModel> result = await _notesManager.TrashNotes(UserId);
+                if(result.Count >= 1)
                     return Ok(new { Status = true, Message = "Trash Data", Data = result });
                 else
                     return BadRequest(new { Status = false, Message = "Trash is Empty" });

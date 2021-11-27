@@ -137,11 +137,11 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
-        public async Task<List<NotesModel>> TrashNotes(long Id)
+        public async Task<List<NotesModel>> TrashNotes(long UserId)
         {
             try
             {
-                return await _notesRepository.ShowTrashNotes(Id);
+                return await _notesRepository.ShowTrashNotes(UserId);
             }
             catch(Exception e)
             {

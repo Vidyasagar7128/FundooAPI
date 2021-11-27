@@ -258,14 +258,14 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkStatus = _userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
+                var checkStatus = _userContext.Notes.Where(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if(checkStatus != null)
                 {
-                    checkStatus.Status = checkStatus.Status == 2 ? 0 : 2;
-                    checkStatus.Pin = false;
-                    _userContext.Entry(checkStatus).State = EntityState.Modified;
-                    await _userContext.SaveChangesAsync();
-                    return "Moved to Trash!";
+                        checkStatus.Status = checkStatus.Status == 2 ? 0 : 2;
+                        checkStatus.Pin = false;
+                        _userContext.Entry(checkStatus).State = EntityState.Modified;
+                        await _userContext.SaveChangesAsync();
+                        return "Moved to Trash!";
                 }else
                     return "Failed to Move Trash!";
             }
@@ -299,13 +299,13 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<List<NotesModel>> ShowTrashNotes(long Id)
+        public async Task<List<NotesModel>> ShowTrashNotes(long UserId)
         {
             try
             {
-                var checkStatus = _userContext.Notes.Where(e => e.UserId == Id).Count();
+                var checkStatus = _userContext.Notes.Where(e => e.UserId == UserId).Count();
                 if (checkStatus >= 1)
-                    return await _userContext.Notes.Where(e => e.Status == 2).ToListAsync();
+                    return await _userContext.Notes.Where(e => e.Status == 2 && e.UserId == UserId).ToListAsync();
                 else
                     throw new ArgumentNullException("Trash is Empty!");
             }
