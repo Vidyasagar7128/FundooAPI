@@ -204,11 +204,11 @@ namespace FundooNotes.Controllers
                 if(color.Equals("Color Changed!"))
                     return this.Ok(new { Status = true,Message = "Color Changed!"});
                 else
-                    return this.BadRequest(new { Status = true, Message = "Color Changed!" });
+                    return this.BadRequest(new { Status = false, Message = "Failed to change Color!" });
             }
             catch(Exception e)
             {
-                throw new Exception(e.Message);
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
         /// <summary>

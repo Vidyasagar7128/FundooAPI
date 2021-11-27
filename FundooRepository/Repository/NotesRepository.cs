@@ -111,7 +111,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var idCheck =this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
+                var idCheck =this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if (idCheck != null)
                 {
                     idCheck.Title = notesModel.Title;
@@ -187,7 +187,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkColor = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
+                var checkColor = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if (checkColor != null)
                 {
                     checkColor.Theme = notesModel.Theme;
