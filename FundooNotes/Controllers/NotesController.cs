@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
     public class NotesController : Controller
     {
         private readonly INotesManager _notesManager;
@@ -21,7 +23,7 @@ namespace FundooNotes.Controllers
             this._notesManager = notesManager;
         }
         [HttpPost]
-        [Route("api/addnote")]
+        [Route("create")]
         public async Task<IActionResult> AddNotes([FromBody] NotesModel notesModel)
         {
             try
@@ -50,17 +52,17 @@ namespace FundooNotes.Controllers
                 throw new Exception(e.Message);
             }
         }
-        [HttpPost]
-        [Route("api/image")]
-        public IActionResult UploadImage([FromBody] IFormFile file)
+        [HttpPut]
+        [Route("image")]
+        public async Task<IActionResult> UploadImage(IFormFile file, long userId)
         {
             try
             {
-                var result = _notesManager.AddImage(file);
-                if (result == "Something went Wrong!")
-                    return BadRequest(new { Status = false, Message = result });
-                else
+                var result = await _notesManager.AddImage(file,userId);
+                if (result == "Uploaded!")
                     return Ok(new { Status = true, Message = result });
+                else
+                    return BadRequest(new { Status = false, Message = result });
             }
             catch(Exception e)
             {
@@ -68,12 +70,12 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpGet]
-        [Route("api/allnotes")]
-        public async Task<IActionResult> AllNotes()
+        [Route("allnotes")]
+        public async Task<IActionResult> AllNotes(long UserId)
         {
             try
             {
-                List<NotesModel> result = await this._notesManager.ShowAllNotes();
+                List<NotesModel> result = await this._notesManager.ShowAllNotes(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Data is available", Data = result });
@@ -89,7 +91,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPut]
-        [Route("api/update")]
+        [Route("update")]
         public async Task<IActionResult> UpdateNote([FromBody] NotesModel notesModel)
         {
             try
@@ -124,7 +126,7 @@ namespace FundooNotes.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/delete")]
+        [Route("delete")]
         public async Task<IActionResult> DeleteNote([FromQuery] string Id)
         {
             try
@@ -159,7 +161,7 @@ namespace FundooNotes.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("api/restore")]
+        [Route("restore")]
         public async Task<IActionResult> RestoreNote([FromBody] NotesModel notesModel)
         {
             try
@@ -193,7 +195,7 @@ namespace FundooNotes.Controllers
         /// <param name="notesModel"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("api/color")]
+        [Route("color")]
         public async Task<IActionResult> ChangeColors([FromBody] NotesModel notesModel)
         {
             try
@@ -215,7 +217,7 @@ namespace FundooNotes.Controllers
         /// <param name="notesModel"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("api/archive")]
+        [Route("archive")]
         public async Task<IActionResult> ArchiveStatus([FromBody] NotesModel notesModel)
         {
             try
@@ -232,7 +234,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPut]
-        [Route("api/pin")]
+        [Route("pin")]
         public async Task<IActionResult> PinStatus([FromBody] NotesModel notesModel)
         {
             try
@@ -249,7 +251,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPut]
-        [Route("api/trash")]
+        [Route("trash")]
         public async Task<IActionResult> TrashNotes([FromBody] NotesModel notesModel)
         {
             try
@@ -266,7 +268,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpGet]
-        [Route("api/archive")]
+        [Route("archive")]
         public async Task<IActionResult> ShowArchive([FromQuery] long Id)
         {
             try
@@ -283,7 +285,7 @@ namespace FundooNotes.Controllers
             }
         }
         [HttpPut]
-        [Route("api/trashlist")]
+        [Route("trashlist")]
         public async Task<IActionResult> ShowTrash([FromQuery] long Id)
         {
             try

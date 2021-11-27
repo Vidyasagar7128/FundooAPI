@@ -13,6 +13,7 @@ namespace FundooModels
         public long NoteId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
+        public string Image { get; set; }
         public string Reminder { get; set; }
         [DefaultValue("white")]
         public string Theme { get; set; }

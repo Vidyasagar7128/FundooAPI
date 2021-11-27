@@ -10,26 +10,26 @@ namespace FundooNotes.Controllers
 {
     public class CollaboratorController : Controller
     {
-        private ICollaboratorManager _collaboratorManager;
+        private readonly ICollaboratorManager _collaboratorManager;
         public CollaboratorController(ICollaboratorManager collaboratorManager)
         {
             _collaboratorManager = collaboratorManager;
         }
         [HttpPost]
-        [Route("api/collaboratecreate")]
-        public IActionResult CreateCb([FromQuery] long Id, [FromBody] List<string> Emails)
+        [Route("api/collaborator")]
+        public async Task<IActionResult> CreateCb([FromBody] NoteShareModel noteShareModel)
         {
             try
             {
-                var result = _collaboratorManager.Collaborator(Id,Emails);
-                if (result == "Collaborator Note Done!")
+                var result = await _collaboratorManager.Collaborator(noteShareModel);
+                if (result == "Note Shared!")
                     return Ok(new { Status = true, Message = result });
                 else
-                    return BadRequest(new { Status = false, Message = result });
+                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
             }
             catch(Exception e)
             {
-                return Ok(new { Status = true, Message = e.Message });
+                return NotFound(new { Status = true, Message = e.Message });
             }
         }
     }

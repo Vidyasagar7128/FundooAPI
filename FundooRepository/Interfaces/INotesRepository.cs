@@ -12,7 +12,7 @@ namespace FundooRepository.Interfaces
 
         Task<string> AddNote(NotesModel notes);
         Task<string> DeleteNote(string Id);
-        Task<List<NotesModel>> ShowNotes();
+        Task<List<NotesModel>> ShowNotes(long UserId);
         Task<string> UpdateNotes(NotesModel notesModel);
         Task<string> Color(NotesModel notesModel);
         Task<string> Archive(NotesModel notesModel);
@@ -21,6 +21,6 @@ namespace FundooRepository.Interfaces
         Task<List<NotesModel>> ShowArchiveNotes(long Id);
         Task<List<NotesModel>> ShowTrashNotes(long Id);
         Task<string> RestoreNote(NotesModel notesModel);
-        string UploadImg(IFormFile file);
+        Task<string> UploadImg(IFormFile file, long userId);
     }
 }

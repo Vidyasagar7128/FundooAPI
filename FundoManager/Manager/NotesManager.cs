@@ -27,22 +27,22 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
-        public string AddImage(IFormFile file)
+        public async Task<string> AddImage(IFormFile file, long userId)
         {
             try
             {
-                return this._notesRepository.UploadImg(file);
+                return await this._notesRepository.UploadImg(file,userId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public async Task<List<NotesModel>> ShowAllNotes()
+        public async Task<List<NotesModel>> ShowAllNotes(long UserId)
         {
             try
             {
-                return await this._notesRepository.ShowNotes();
+                return await this._notesRepository.ShowNotes(UserId);
             }
             catch (Exception e)
             {

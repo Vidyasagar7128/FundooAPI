@@ -19,21 +19,19 @@ namespace FundooRepository.Repository
             _userContext = userContext;
         }
         public IConfiguration configuration { get; set; }
-        public string Create(long Id, List<string> Emails)
+        public async Task<string> Create(NoteShareModel noteShareModel)
         {
             try
             {
-                foreach (var email in Emails)
+                var checkEmail = _userContext.Users.Where(e => e.Email == noteShareModel.Email).ToList();
+                if (checkEmail.Count >= 1)
                 {
-                    var checkEmail = _userContext.Users.Where(e => e.Email == email).Select(x => x.Email);
-                    if (checkEmail != null)
-                    {
-                        return "Collaborator Note Done!";
-                    }
-                    else
-                        return "Empty Collaborator!";
+                    _userContext.Collaborators.AddRange(new CollaboratorModel() { Email = noteShareModel.Email, NoteId = noteShareModel.NoteId, ReceiverId = noteShareModel.UserId });
+                    await _userContext.SaveChangesAsync();
+                    return "Note Shared!";
                 }
-                return "Collaborator Note Failed!";
+                else
+                    return "Failed to Share!";
             }
             catch (Exception e)
             {

@@ -1,6 +1,7 @@
 ﻿using FundooModels;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FundooRepository.Interfaces
 {
@@ -8,6 +9,6 @@ namespace FundooRepository.Interfaces
     {
         IConfiguration configuration { get; set; }
 
-        string Create(long Id, List<string> Emails);
+        Task<string> Create(NoteShareModel noteShareModel);
     }
 }

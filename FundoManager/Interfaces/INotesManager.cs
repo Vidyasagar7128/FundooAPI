@@ -9,7 +9,7 @@ namespace FundoManager.Interfaces
     {
         Task<string> AddNewNote(NotesModel notesModel);
         Task<string> DeleteNotes(string Id);
-        Task<List<NotesModel>> ShowAllNotes();
+        Task<List<NotesModel>> ShowAllNotes(long UserId);
         Task<string> UpdateNote(NotesModel notesModel);
         Task<string> ChangeColor(NotesModel notesModel);
         Task<string> CheckArchive(NotesModel notesModel);
@@ -18,7 +18,7 @@ namespace FundoManager.Interfaces
         Task<List<NotesModel>> ArchiveNotes(long Id);
         Task<List<NotesModel>> TrashNotes(long Id);
         Task<string> BackNotes(NotesModel notesModel);
-        string AddImage(IFormFile file);
+        Task<string> AddImage(IFormFile file, long userId);
     }
     
     

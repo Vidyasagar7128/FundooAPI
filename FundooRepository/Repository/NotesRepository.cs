@@ -49,14 +49,14 @@ namespace FundooRepository.Repository
         /// All Notes Show
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NotesModel>> ShowNotes()
+        public async Task<List<NotesModel>> ShowNotes(long UserId)
         {
             try
             {
-                var notesLength = this._userContext.Notes.Count();
-                if (notesLength >= 1)
+                var notesLength = this._userContext.Notes.Where(e => e.UserId == UserId).ToList();
+                if (notesLength.Count >= 1)
                 {
-                    return await this._userContext.Notes.ToListAsync<NotesModel>();
+                    return await this._userContext.Notes.Where(e => e.UserId == UserId).ToListAsync<NotesModel>();
                 }
                 else
                     throw new ArgumentNullException("You Don't have Notes!");
@@ -70,20 +70,28 @@ namespace FundooRepository.Repository
         /// Upload Image
         /// </summary>
         /// <returns></returns>
-        public string UploadImg(IFormFile file)
+        public async Task<string> UploadImg(IFormFile file,long userId)
         {
             try
             {
                 if (file != null)
                 {
-                    var myAccount = new Account { ApiKey = Configuration.GetConnectionString("Cloudinary:ApiKey"), ApiSecret = Configuration.GetConnectionString("Cloudinary:ApiSecret"), Cloud = Configuration.GetConnectionString("Cloudinary:CloudName") };
-                    Cloudinary cloudinary = new Cloudinary(myAccount);
-                    var uploadParams = new ImageUploadParams()
+                    var checkNotes = _userContext.Notes.Where(e => e.UserId == userId).FirstOrDefault();
+                    Cloudinary cloudinary = new Cloudinary(new Account(
+                                                "171559438548485",
+                                                "Cw3WujFZNaBxKYc0K0pj3dhKExg",
+                                                "dwpsmsxy6"));
+                    var uploadImage = new ImageUploadParams()
                     {
-                        File = new FileDescription(file.FileName, file.OpenReadStream())
+                        File = new FileDescription(file.FileName, file.OpenReadStream()),
                     };
-                    var uploadResult = cloudinary.Upload(uploadParams);
-                    return uploadResult.ToString();
+
+                    var uploadResult = cloudinary.Upload(uploadImage);
+                    var uploadPath = uploadResult.Url;
+                    checkNotes.Image = uploadPath.ToString();
+                    this._userContext.Notes.Update(checkNotes);
+                    await this._userContext.SaveChangesAsync();
+                    return "Image added Successfully";
                 }
                 else
                     return "Something went Wrong!";
@@ -308,3 +316,4 @@ namespace FundooRepository.Repository
         }
     }
 }
+///Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNvbnVAZ21haWwuY29tIiwibmJmIjoxNjM3OTI4MTA0LCJleHAiOjE2Mzc5Mjk5MDQsImlhdCI6MTYzNzkyODEwNH0.MsCuRtXz6caFoi7o7xo_wOygXDnXLmzMtZDnGvD6l54

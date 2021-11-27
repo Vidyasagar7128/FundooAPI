@@ -1,10 +1,11 @@
 ﻿using FundooModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FundoManager.Interfaces
 {
     public interface ICollaboratorManager
     {
-        string Collaborator(long Id, List<string> Emails);
+        Task<string> Collaborator(NoteShareModel noteShareModel);
     }
 }

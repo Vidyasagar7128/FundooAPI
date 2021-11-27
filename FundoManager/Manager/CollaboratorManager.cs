@@ -4,21 +4,22 @@ using FundooRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FundoManager.Manager
 {
     public class CollaboratorManager : ICollaboratorManager
     {
-        private ICollaboratorRepository _collaboratorRepository;
+        private readonly ICollaboratorRepository _collaboratorRepository;
         public CollaboratorManager(ICollaboratorRepository collaboratorRepository)
         {
             _collaboratorRepository = collaboratorRepository;
         }
-        public string Collaborator(long Id, List<string> Emails)
+        public async Task<string> Collaborator(NoteShareModel noteShareModel)
         {
             try
             {
-                return _collaboratorRepository.Create(Id, Emails);
+                return await _collaboratorRepository.Create(noteShareModel);
             }
             catch (Exception e)
             {
