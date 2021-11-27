@@ -49,7 +49,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpPut]
@@ -87,7 +87,7 @@ namespace FundooNotes.Controllers
             }
             catch(Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpPut]
@@ -117,7 +117,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         /// <summary>
@@ -152,7 +152,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         /// <summary>
@@ -230,7 +230,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpPut]
@@ -247,7 +247,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpPut]
@@ -264,7 +264,7 @@ namespace FundooNotes.Controllers
             }
             catch(Exception e)
             {
-                throw new Exception(e.Message);
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpGet]
@@ -274,7 +274,7 @@ namespace FundooNotes.Controllers
             try
             {
                 List<NotesModel> result = await _notesManager.ArchiveNotes(Id);
-                if (result != null)
+                if (result.Count >= 1)
                     return Ok(new { Status = true, Message = "Data is available", Data = result });
                 else
                     return BadRequest(new ResponseModel<string>() { Status = false, Message = "Archive is Empty" });

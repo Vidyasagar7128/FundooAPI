@@ -206,7 +206,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
+                var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if(checkArchive != null)
                 {
                     checkArchive.Status = checkArchive.Status == 0 ? 1 : 0;
@@ -232,7 +232,7 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId).FirstOrDefault();
+                var checkPin = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if (checkPin != null)
                 {
                     checkPin.Pin = checkPin.Pin == false ? true : false;
@@ -285,7 +285,7 @@ namespace FundooRepository.Repository
             {
                 var checkStatus = _userContext.Notes.Where(e => e.UserId == Id).Count();
                 if(checkStatus >= 1)
-                    return await _userContext.Notes.Where(e => e.Status == 1).ToListAsync();
+                    return await _userContext.Notes.Where(e => e.Status == 1 && e.UserId == Id).ToListAsync();
                  else
                     throw new ArgumentNullException("No Archive Notes!");
             }
