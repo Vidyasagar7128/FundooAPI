@@ -23,6 +23,26 @@ namespace FundooRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LabelNames",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LabelName = table.Column<string>(nullable: true),
+                    UserId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LabelNames", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LabelNames_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Notes",
                 columns: table => new
                 {
@@ -55,10 +75,8 @@ namespace FundooRepository.Migrations
                     CollaboratorId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: false),
-                    SenderId = table.Column<long>(nullable: false),
                     NoteId = table.Column<long>(nullable: false),
-                    ReceiverId = table.Column<long>(nullable: true)
+                    SenderId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,12 +87,6 @@ namespace FundooRepository.Migrations
                         principalTable: "Notes",
                         principalColumn: "NoteId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Collaborators_Users_ReceiverId",
-                        column: x => x.ReceiverId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,9 +122,9 @@ namespace FundooRepository.Migrations
                 column: "NoteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Collaborators_ReceiverId",
-                table: "Collaborators",
-                column: "ReceiverId");
+                name: "IX_LabelNames_UserId",
+                table: "LabelNames",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Labels_NoteId",
@@ -134,6 +146,9 @@ namespace FundooRepository.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Collaborators");
+
+            migrationBuilder.DropTable(
+                name: "LabelNames");
 
             migrationBuilder.DropTable(
                 name: "Labels");

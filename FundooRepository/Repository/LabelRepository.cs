@@ -123,5 +123,87 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Create Label
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> CreateLabel(CreateLabelModel createLabel)
+        {
+            try
+            {
+                if (createLabel != null)
+                {
+                    var checkLabel = _userContext.LabelNames.Where(e => e.LabelName == createLabel.LabelName && e.UserId == e.UserId).FirstOrDefault();
+                    if (checkLabel != null)
+                        return "Already Exist!";
+                    else
+                    {
+                        _userContext.LabelNames.Add(createLabel);
+                        await _userContext.SaveChangesAsync();
+                        return "Label Created!";
+                    }
+                }
+                else
+                    return "Please Enter Labelname First!";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// Show All Labels
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public async Task<List<string>> labelList(long UserId)
+        {
+            try
+            {
+                return await _userContext.LabelNames.Where(e => e.UserId == UserId).Select(e => e.LabelName ).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentNullException(e.Message);
+            }
+        }
+        public async Task<string> EditLabelName(EditLabelModel editLabelModel)
+        {
+            try
+            {
+                var checkLabelName = _userContext.LabelNames.Where(e => e.LabelName == editLabelModel.OldlabelName && e.UserId == editLabelModel.UserId).FirstOrDefault();
+                if (checkLabelName != null)
+                {
+                    checkLabelName.LabelName = editLabelModel.NewLabelName;
+                    _userContext.Entry(checkLabelName).State = EntityState.Modified;
+                    await _userContext.SaveChangesAsync();
+                    return "Label Edited!";
+                }
+                else
+                    return "label does Not Exist!";
+            }catch(ArgumentNullException e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> DeleteLabels(string LabelName, long UserId)
+        {
+            try
+            {
+                var checkLabelName = _userContext.LabelNames.Where(e => e.LabelName == LabelName && e.UserId == UserId).ToList();
+                if (checkLabelName.Count() >= 1)
+                {
+                    _userContext.LabelNames.RemoveRange(checkLabelName);
+                    await _userContext.SaveChangesAsync();
+                    return "Label Deleted!";
+                }
+                else
+                    return "You don't have Label!";
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211127033208_Fundoo")]
+    [Migration("20211128184931_Fundoo")]
     partial class Fundoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,22 +34,34 @@ namespace FundooRepository.Migrations
                     b.Property<long>("NoteId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("ReceiverId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("SenderId")
                         .HasColumnType("bigint");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.HasKey("CollaboratorId");
 
                     b.HasIndex("NoteId");
 
-                    b.HasIndex("ReceiverId");
-
                     b.ToTable("Collaborators");
+                });
+
+            modelBuilder.Entity("FundooModels.CreateLabelModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LabelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LabelNames");
                 });
 
             modelBuilder.Entity("FundooModels.LabelModel", b =>
@@ -150,10 +162,15 @@ namespace FundooRepository.Migrations
                         .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("FundooModels.CreateLabelModel", b =>
+                {
                     b.HasOne("FundooModels.SignUpModel", "User")
                         .WithMany()
-                        .HasForeignKey("ReceiverId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FundooModels.LabelModel", b =>

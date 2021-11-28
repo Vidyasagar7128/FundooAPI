@@ -23,12 +23,17 @@ namespace FundooRepository.Repository
         {
             try
             {
-                var checkEmail = _userContext.Users.Where(e => e.Email == noteShareModel.Email).ToList();
-                if (checkEmail.Count >= 1)
+                var checkEmail = _userContext.Users.Where(e => e.Email == noteShareModel.Email).FirstOrDefault();
+                if (checkEmail != null)
                 {
-                    _userContext.Collaborators.AddRange(new CollaboratorModel() { Email = noteShareModel.Email, NoteId = noteShareModel.NoteId, ReceiverId = noteShareModel.UserId });
-                    await _userContext.SaveChangesAsync();
-                    return "Note Shared!";
+                    if (_userContext.Notes.Where(e => e.NoteId == noteShareModel.NoteId && e.UserId == noteShareModel.SenderId) != null)
+                    {
+                        _userContext.Collaborators.AddRange(new CollaboratorModel() { Email = noteShareModel.Email, NoteId = noteShareModel.NoteId, SenderId = noteShareModel.SenderId });
+                        await _userContext.SaveChangesAsync();
+                        return "Note Shared!";
+                    }
+                    else
+                        return "Something went Wrong!";
                 }
                 else
                     return "Failed to Share!";

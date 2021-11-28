@@ -33,7 +33,7 @@ namespace FundooRepository.Repository
             {
                 if (notes != null)
                 {
-                    this._userContext.Notes.Add(notes);
+                    _userContext.Notes.Add(notes);
                     await this._userContext.SaveChangesAsync();
                     return "Note Added Succesfully!";
                 }
