@@ -15,5 +15,8 @@ namespace FundooModels
         [ForeignKey("NoteId")]
         public virtual NotesModel Note { get; set; }
         public long SenderId { get; set; }
+        public long? ReceiverId { get; set; }
+        [ForeignKey("ReceiverId")]
+        public virtual SignUpModel User { get; set; }
     }
 }

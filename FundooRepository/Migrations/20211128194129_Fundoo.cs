@@ -76,7 +76,8 @@ namespace FundooRepository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(nullable: true),
                     NoteId = table.Column<long>(nullable: false),
-                    SenderId = table.Column<long>(nullable: false)
+                    SenderId = table.Column<long>(nullable: false),
+                    ReceiverId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,6 +88,12 @@ namespace FundooRepository.Migrations
                         principalTable: "Notes",
                         principalColumn: "NoteId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Collaborators_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,6 +127,11 @@ namespace FundooRepository.Migrations
                 name: "IX_Collaborators_NoteId",
                 table: "Collaborators",
                 column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Collaborators_ReceiverId",
+                table: "Collaborators",
+                column: "ReceiverId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LabelNames_UserId",

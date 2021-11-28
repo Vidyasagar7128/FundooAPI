@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211128184931_Fundoo")]
+    [Migration("20211128194129_Fundoo")]
     partial class Fundoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,12 +34,17 @@ namespace FundooRepository.Migrations
                     b.Property<long>("NoteId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("ReceiverId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("SenderId")
                         .HasColumnType("bigint");
 
                     b.HasKey("CollaboratorId");
 
                     b.HasIndex("NoteId");
+
+                    b.HasIndex("ReceiverId");
 
                     b.ToTable("Collaborators");
                 });
@@ -162,6 +167,10 @@ namespace FundooRepository.Migrations
                         .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FundooModels.SignUpModel", "User")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId");
                 });
 
             modelBuilder.Entity("FundooModels.CreateLabelModel", b =>
