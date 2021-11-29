@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211128194129_Fundoo")]
+    [Migration("20211128221200_Fundoo")]
     partial class Fundoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,9 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("LabelId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("Pin")
                         .HasColumnType("bit");
 
@@ -126,6 +129,8 @@ namespace FundooRepository.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("NoteId");
+
+                    b.HasIndex("LabelId");
 
                     b.HasIndex("UserId");
 
@@ -195,6 +200,10 @@ namespace FundooRepository.Migrations
 
             modelBuilder.Entity("FundooModels.NotesModel", b =>
                 {
+                    b.HasOne("FundooModels.CreateLabelModel", "Label")
+                        .WithMany()
+                        .HasForeignKey("LabelId");
+
                     b.HasOne("FundooModels.SignUpModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

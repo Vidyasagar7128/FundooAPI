@@ -55,11 +55,18 @@ namespace FundooRepository.Migrations
                     Theme = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     Pin = table.Column<bool>(nullable: false),
+                    LabelId = table.Column<long>(nullable: true),
                     UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.NoteId);
+                    table.ForeignKey(
+                        name: "FK_Notes_LabelNames_LabelId",
+                        column: x => x.LabelId,
+                        principalTable: "LabelNames",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Notes_Users_UserId",
                         column: x => x.UserId,
@@ -149,6 +156,11 @@ namespace FundooRepository.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notes_LabelId",
+                table: "Notes",
+                column: "LabelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Notes_UserId",
                 table: "Notes",
                 column: "UserId");
@@ -160,13 +172,13 @@ namespace FundooRepository.Migrations
                 name: "Collaborators");
 
             migrationBuilder.DropTable(
-                name: "LabelNames");
-
-            migrationBuilder.DropTable(
                 name: "Labels");
 
             migrationBuilder.DropTable(
                 name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "LabelNames");
 
             migrationBuilder.DropTable(
                 name: "Users");

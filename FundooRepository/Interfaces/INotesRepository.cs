@@ -8,8 +8,6 @@ namespace FundooRepository.Interfaces
 {
     public interface INotesRepository
     {
-        IConfiguration Configuration { get; set; }
-
         Task<string> AddNote(NotesModel notes);
         Task<string> DeleteNote(long NoteId, long UserId);
         Task<List<NotesModel>> ShowNotes(long UserId);

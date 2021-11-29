@@ -19,76 +19,6 @@ namespace FundooNotes.Controllers
         {
             _labelManager = labelManager;
         }
-        [HttpPost]
-        [Route("add")]
-        public async Task<IActionResult> Add([FromBody] LabelStatusModel labelStatusModel)
-        {
-            try
-            {
-                var result = await _labelManager.AddLabel(labelStatusModel);
-                if (result == "Label Added sucessfully!")
-                    return Ok(new { Status = true, Message = "Label Added sucessfully!" });
-                else
-                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
-            }
-            catch(Exception e)
-            {
-                return NotFound(new { Status = false, Message = e.Message });
-            }
-        }
-        [HttpDelete]
-        [Route("delete")]
-        public async Task<IActionResult> DeleteLabel([FromBody] LabelStatusModel labelStatusModel)
-        {
-            try
-            {
-                var result = await _labelManager.RemoveLabel(labelStatusModel);
-                if (result == "Label Deleted!")
-                    return Ok(new ResponseModel<string> { Status = true, Message = result });
-                else
-                    return BadRequest(new ResponseModel<string> { Status = false, Message = result });
-            }
-            catch(Exception e)
-            {
-                return NotFound(new ResponseModel<string> { Status = false, Message = e.Message });
-            }
-        }
-        [HttpPost]
-        [Route("labels")]
-        public async Task<IActionResult> LabelsList([FromBody] long UserId)
-        {
-            try
-            {
-                var result = await _labelManager.ShowLabels(UserId);
-                if (!result.Contains("You Don't have Labels!"))
-                    return Ok(new { Status = true, Message = "Labels!",Data = result });
-                else
-                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
-            }
-            catch (Exception e)
-            {
-                return NotFound(new { Status = false, Message = e.Message });
-            }
-        }
-
-        [HttpPost]
-        [Route("list")]
-        public IActionResult LabelsDataList([FromBody] int UserId)
-        {
-            try
-            {
-                var result = _labelManager.LabelData(UserId);
-                if (result.Count() >= 1)
-                    return Ok(new { Status = true, Message = "Label Data!", Data = result });
-                else
-                    return BadRequest(new { Status = false, Message = "Label is Empty!" });
-            }
-            catch (Exception e)
-            {
-                return NotFound(new { Status = false, Message = e.Message });
-            }
-        }
-        ////////////////////////New Implement/////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// Create Labels
         /// </summary>
@@ -165,6 +95,23 @@ namespace FundooNotes.Controllers
                 var result = await _labelManager.DeleteLabel(LabelName, UserId);
                 if (result.Equals("Label Deleted!"))
                     return Ok(new { Status = true, Message = result });
+                else
+                    return BadRequest(new { Status = false, Message = result });
+            }
+            catch (Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
+            }
+        }
+        [HttpGet]
+        [Route("data")]
+        public IActionResult LabelsData(long UserId, string LabelName)
+        {
+            try
+            {
+                var result = _labelManager.ShowLabelLisData(UserId, LabelName);
+                if (result.Count >= 1)
+                    return Ok(new { Status = true, Message = "Label List!", Data = result });
                 else
                     return BadRequest(new { Status = false, Message = result });
             }
