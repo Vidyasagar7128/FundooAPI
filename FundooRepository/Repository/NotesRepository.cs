@@ -74,23 +74,23 @@ namespace FundooRepository.Repository
         {
             try
             {
-                if (file != null)
+                var checkNote = _userContext.Notes.Where(e => e.UserId == userId).FirstOrDefault();
+                if (checkNote != null)
                 {
-                    var checkNotes = _userContext.Notes.Where(e => e.UserId == userId).FirstOrDefault();
                     Cloudinary cloudinary = new Cloudinary(new Account(
-                                                "171559438548485",
-                                                "Cw3WujFZNaBxKYc0K0pj3dhKExg",
-                                                "dwpsmsxy6"));
+                                                    "dwpsmsxy6",
+                                                    "171559438548485",
+                                                    "Cw3WujFZNaBxKYc0K0pj3dhKExg"
+                                                ));
                     var uploadImage = new ImageUploadParams()
                     {
                         File = new FileDescription(file.FileName, file.OpenReadStream()),
                     };
-
                     var uploadResult = cloudinary.Upload(uploadImage);
                     var uploadPath = uploadResult.Url;
-                    checkNotes.Image = uploadPath.ToString();
-                    this._userContext.Notes.Update(checkNotes);
-                    await this._userContext.SaveChangesAsync();
+                    checkNote.Image = uploadPath.ToString();
+                    _userContext.Entry(checkNote).State = EntityState.Modified;
+                    await _userContext.SaveChangesAsync();
                     return "Image added Successfully";
                 }
                 else

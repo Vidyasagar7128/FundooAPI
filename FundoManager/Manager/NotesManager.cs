@@ -31,7 +31,7 @@ namespace FundoManager.Manager
         {
             try
             {
-                return await this._notesRepository.UploadImg(file,userId);
+                return await _notesRepository.UploadImg(file,userId);
             }
             catch (Exception e)
             {
