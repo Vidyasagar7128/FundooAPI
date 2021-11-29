@@ -59,7 +59,7 @@ namespace FundooNotes.Controllers
             try
             {
                 var result = await _notesManager.AddImage(file,userId);
-                if (result == "Uploaded!")
+                if (result == "Image added Successfully")
                     return Ok(new { Status = true, Message = result });
                 else
                     return BadRequest(new { Status = false, Message = result });
