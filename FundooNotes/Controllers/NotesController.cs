@@ -1,17 +1,21 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using FundoManager.Interfaces;
-using FundooModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="NotesController.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Gaikwad Vidyasagar"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FundooNotes.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using FundoManager.Interfaces;
+    using FundooModels;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    
+
     //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -22,6 +26,12 @@ namespace FundooNotes.Controllers
         {
             this._notesManager = notesManager;
         }
+
+        /// <summary>
+        /// adding notes
+        /// </summary>
+        /// <param name="notesModel">passing NotesModel model</param>
+        /// <returns>return IActionResult</returns>
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> AddNotes([FromBody] NotesModel notesModel)
@@ -49,9 +59,15 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+        /// <summary>
+        /// Uploading Image to cloudinary
+        /// </summary>
+        /// <param name="file">IformFile type</param>
+        /// <param name="userId">User Is</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("image")]
         public async Task<IActionResult> UploadImage(IFormFile file, long userId)
@@ -60,15 +76,25 @@ namespace FundooNotes.Controllers
             {
                 var result = await _notesManager.AddImage(file,userId);
                 if (result == "Image added Successfully")
-                    return Ok(new { Status = true, Message = result });
+                {
+                    return this.Ok(new { Status = true, Message = result });
+                }
                 else
-                    return BadRequest(new { Status = false, Message = result });
+                {
+                    return this.BadRequest(new { Status = false, Message = result });
+                }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
+        /// <summary>
+        /// get all notes
+        /// </summary>
+        /// <param name="UserId">Passing userId</param>
+        /// <returns>returns IActionResult</returns>
         [HttpGet]
         [Route("allnotes")]
         public async Task<IActionResult> AllNotes(long UserId)
@@ -85,11 +111,17 @@ namespace FundooNotes.Controllers
                     return this.BadRequest(new ResponseModel<string> { Status = false, Message = result.ToString(), Data = null});
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
+        /// <summary>
+        /// Update notes
+        /// </summary>
+        /// <param name="notesModel">Passing NotesModel</param>
+        /// <returns>returns IActionResult</returns>
         [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdateNote([FromBody] NotesModel notesModel)
@@ -117,14 +149,16 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
         /// <summary>
-        /// Delete Note Permenantly
+        /// Delete Notes
         /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
+        /// <param name="NoteId">using NoteId</param>
+        /// <param name="UserId">using UserId</param>
+        /// <returns>return IActionResult</returns>
         [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> DeleteNote(long NoteId, long UserId)
@@ -152,14 +186,15 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
         /// <summary>
-        /// Restore Notes from Trash
+        /// Restore Notes
         /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
+        /// <param name="notesModel">using NotesModel</param>
+        /// <returns>IActionResult of RestoreNote</returns>
         [HttpPut]
         [Route("restore")]
         public async Task<IActionResult> RestoreNote([FromBody] NotesModel notesModel)
@@ -189,11 +224,12 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = e.Message });
             }
         }
+
         /// <summary>
         /// Change Color of Note UI
         /// </summary>
         /// <param name="notesModel"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult of ChangeColors</returns>
         [HttpPut]
         [Route("color")]
         public async Task<IActionResult> ChangeColors([FromBody] NotesModel notesModel)
@@ -202,7 +238,7 @@ namespace FundooNotes.Controllers
             {
                 var color = await this._notesManager.ChangeColor(notesModel);
                 if(color.Equals("Color Changed!"))
-                    return this.Ok(new { Status = true,Message = "Color Changed!"});
+                    return this.Ok(new { Status = true, Message = "Color Changed!"});
                 else
                     return this.BadRequest(new { Status = false, Message = "Failed to change Color!" });
             }
@@ -211,11 +247,12 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
         /// <summary>
         /// Check Archive Status Put into Archive and Remove from it.
         /// </summary>
         /// <param name="notesModel"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult of ArchiveStatus</returns>
         [HttpPut]
         [Route("archive")]
         public async Task<IActionResult> ArchiveStatus([FromBody] NotesModel notesModel)
@@ -224,15 +261,25 @@ namespace FundooNotes.Controllers
             {
                 var color = await this._notesManager.CheckArchive(notesModel);
                 if (color.Equals("Archived!"))
+                {
                     return this.Ok(new { Status = true, Message = "Archived!" });
+                }
                 else
+                {
                     return this.BadRequest(new { Status = true, Message = "Failed to Archive!" });
+                }
             }
             catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
+        /// <summary>
+        /// Pin notes
+        /// </summary>
+        /// <param name="notesModel">passing NotesModel</param>
+        /// <returns>IActionResult of PinStatus</returns>
         [HttpPut]
         [Route("pin")]
         public async Task<IActionResult> PinStatus([FromBody] NotesModel notesModel)
@@ -241,13 +288,17 @@ namespace FundooNotes.Controllers
             {
                 var color = await this._notesManager.CheckPin(notesModel);
                 if (color.Equals("Pinned!"))
+                {
                     return this.Ok(new { Status = true, Message = "Pinned!" });
+                }
                 else
+                {
                     return this.BadRequest(new { Status = true, Message = "Failed to Pin!" });
+                }
             }
             catch (Exception e)
             {
-                return NotFound(new { Status = false, Message = e.Message });
+                return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
         [HttpPut]
