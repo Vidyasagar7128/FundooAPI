@@ -20,6 +20,7 @@ namespace FundoManager.Manager
     /// </summary>
     public class NotesManager : INotesManager
     {
+<<<<<<< HEAD
         /// <summary>
         /// created variable of INotesRepository
         /// </summary>
@@ -29,6 +30,9 @@ namespace FundoManager.Manager
         /// assign values to the _notesRepository
         /// </summary>
         /// <param name="notesRepository">Interface INotesRepository</param>
+=======
+        private readonly INotesRepository _notesRepository;
+>>>>>>> master
         public NotesManager(INotesRepository notesRepository)
         {
             this._notesRepository = notesRepository;

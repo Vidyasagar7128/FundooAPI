@@ -1,9 +1,17 @@
 <stylecopresultscache>
   <version>12</version>
+<<<<<<< HEAD
+=======
+  <project key="-1554834012">
+    <configuration>
+    </configuration>
+  </project>
+>>>>>>> master
   <sourcecode name="UserManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2021/11/29 21:16:12.151</styleCop>
       <settingsFile>2021/11/29 21:16:12.124</settingsFile>
+<<<<<<< HEAD
       <sourceFile>2021/12/01 15:56:07.931</sourceFile>
       <parser>2021/11/29 21:16:12.151</parser>
       <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
@@ -197,6 +205,9 @@
       <styleCop>2021/11/29 21:16:12.151</styleCop>
       <settingsFile>2021/11/29 21:16:12.124</settingsFile>
       <sourceFile>2021/12/01 16:24:41.762</sourceFile>
+=======
+      <sourceFile>2021/12/01 14:04:42.666</sourceFile>
+>>>>>>> master
       <parser>2021/11/29 21:16:12.151</parser>
       <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -216,6 +227,7 @@
     <violations>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
         <context>Field names must not start with an underscore.</context>
+<<<<<<< HEAD
         <line>26</line>
         <warning>False</warning>
       </violation>
@@ -254,12 +266,28 @@
         <startColumn>13</startColumn>
         <endLine>237</endLine>
         <endColumn>17</endColumn>
+=======
+        <line>24</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ConstructorSummaryDocumentationMustBeginWithStandardText" ruleCheckId="SA1642">
+        <context>The documentation text within the constructor's summary tag must begin with the text: Initializes a new instance of the &lt;see cref="UserManager" /&gt; class.</context>
+        <line>30</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
+        <context>The documentation text within the summary tag contains incorrectly spelled words: 'jwt'</context>
+        <line>74</line>
+>>>>>>> master
         <warning>False</warning>
       </violation>
     </violations>
   </sourcecode>
+<<<<<<< HEAD
   <project key="-1554834012">
     <configuration>
     </configuration>
   </project>
+=======
+>>>>>>> master
 </stylecopresultscache>

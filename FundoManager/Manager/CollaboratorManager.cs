@@ -26,5 +26,27 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+        public List<NotesModel> ShowCollab(long UserId)
+        {
+            try
+            {
+                return _collaboratorRepository.ShowCollaborator(UserId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> DelCollab(long UserId)
+        {
+            try
+            {
+                return await _collaboratorRepository.DeleteCollabs(UserId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace FundooRepository.Context
         public UserContext(DbContextOptions<UserContext> options) :base(options){}
         public DbSet<SignUpModel> Users { get; set; }
         public DbSet<NotesModel> Notes { get; set; }
-        public DbSet<LabelModel> Labels { get; set; }
         public DbSet<CollaboratorModel> Collaborators { get; set; }
+        public DbSet<CreateLabelModel> Labels { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FundooModels;
+using System.Threading.Tasks;
 
 namespace FundoManager.Interfaces
 {
@@ -8,5 +9,6 @@ namespace FundoManager.Interfaces
         string LoginUser(LoginModel login);
         string SendEmailResetPassword(string email);
         string GetJwtToken(string Email);
+        Task<string> ResetPass(ResetPasswordModel resetPasswordModel);
     }
 }

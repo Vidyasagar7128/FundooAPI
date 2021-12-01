@@ -6,15 +6,12 @@ using System.Text;
 
 namespace FundooModels
 {
-    public class LabelModel
+    public class CreateLabelModel
     {
         [Key]
-        public long LabelId { get; set; }
-        public string Name { get; set; }
-        public long? NoteId { get; set; }
-        [ForeignKey("NoteId")]
-        public virtual NotesModel Note { get; set; }
-        public long? UserId { get; set; }
+        public long Id { get; set; }
+        public string LabelName { get; set; }
+        public long UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual SignUpModel User { get; set; }
     }

@@ -7,7 +7,7 @@ namespace FundooModels
     public class NoteShareModel
     {
         public long NoteId { get; set; }
-        public long UserId { get; set; }
+        public long SenderId { get; set; }
         public string Email { get; set; }
     }
 }

@@ -38,9 +38,6 @@ namespace FundooRepository.Migrations
                     b.Property<long>("SenderId")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.HasKey("CollaboratorId");
 
                     b.HasIndex("NoteId");
@@ -50,25 +47,20 @@ namespace FundooRepository.Migrations
                     b.ToTable("Collaborators");
                 });
 
-            modelBuilder.Entity("FundooModels.LabelModel", b =>
+            modelBuilder.Entity("FundooModels.CreateLabelModel", b =>
                 {
-                    b.Property<long>("LabelId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LabelName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("NoteId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("LabelId");
-
-                    b.HasIndex("NoteId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -87,6 +79,9 @@ namespace FundooRepository.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("LabelId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("Pin")
                         .HasColumnType("bit");
@@ -107,6 +102,8 @@ namespace FundooRepository.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("NoteId");
+
+                    b.HasIndex("LabelId");
 
                     b.HasIndex("UserId");
 
@@ -154,19 +151,21 @@ namespace FundooRepository.Migrations
                         .HasForeignKey("ReceiverId");
                 });
 
-            modelBuilder.Entity("FundooModels.LabelModel", b =>
+            modelBuilder.Entity("FundooModels.CreateLabelModel", b =>
                 {
-                    b.HasOne("FundooModels.NotesModel", "Note")
-                        .WithMany()
-                        .HasForeignKey("NoteId");
-
                     b.HasOne("FundooModels.SignUpModel", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FundooModels.NotesModel", b =>
                 {
+                    b.HasOne("FundooModels.CreateLabelModel", "Label")
+                        .WithMany()
+                        .HasForeignKey("LabelId");
+
                     b.HasOne("FundooModels.SignUpModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

@@ -7,11 +7,11 @@ namespace FundooRepository.Interfaces
 {
     public interface ILabelRepository
     {
-        IConfiguration Configuration { get; set; }
-
-        Task<string> Add(LabelStatusModel labelStatusModel);
-        Task<string> Remove(LabelStatusModel labelStatusModel);
-        Task<List<string>> Show(long UserId);
-        List<NotesModel> ShowLabelData(long UserId);
+        Task<string> CreateLabel(CreateLabelModel createLabel);
+        Task<List<string>> LabelList(long UserId);
+        Task<string> EditLabelName(EditLabelModel editLabelModel);
+        Task<string> DeleteLabels(string LabelName, long UserId);
+        List<NotesModel> ShowlabelNotes(long UserId, string LabelName);
+        Task<string> Delete(long userId, string labelNames);
     }
 }

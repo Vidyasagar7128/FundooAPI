@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FundooNotes.Controllers
 {
+    //[Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorManager _collaboratorManager;
@@ -16,7 +19,7 @@ namespace FundooNotes.Controllers
             _collaboratorManager = collaboratorManager;
         }
         [HttpPost]
-        [Route("api/collaborator")]
+        [Route("add")]
         public async Task<IActionResult> CreateCb([FromBody] NoteShareModel noteShareModel)
         {
             try
@@ -29,7 +32,41 @@ namespace FundooNotes.Controllers
             }
             catch(Exception e)
             {
-                return NotFound(new { Status = true, Message = e.Message });
+                return NotFound(new { Status = false, Message = e.Message });
+            }
+        }
+        [HttpGet]
+        [Route("show")]
+        public IActionResult ShowCollabs(long UserId)
+        {
+            try
+            {
+                List<NotesModel> result = _collaboratorManager.ShowCollab(UserId);
+                if (result.Count >= 0)
+                    return Ok(new { Status = true, Message = result });
+                else
+                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
+            }
+            catch (Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
+            }
+        }
+        [HttpDelete]
+        [Route("remove")]
+        public async Task<IActionResult> CollabsDel(long UserId)
+        {
+            try
+            {
+                var result = await _collaboratorManager.DelCollab(UserId);
+                if (result.Equals("Collaborator Deleted!"))
+                    return Ok(new { Status = true, Message = result });
+                else
+                    return BadRequest(new { Status = false, Message = "Something went Wrong!" });
+            }
+            catch (Exception e)
+            {
+                return NotFound(new { Status = false, Message = e.Message });
             }
         }
     }
