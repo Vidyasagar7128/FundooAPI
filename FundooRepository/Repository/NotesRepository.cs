@@ -20,12 +20,9 @@ namespace FundooRepository.Repository
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 
-<<<<<<< HEAD
     /// <summary>
     /// NotesRepository it handles the notes API
     /// </summary>
-=======
->>>>>>> master
     public class NotesRepository : INotesRepository
     {
         /// <summary>
@@ -33,37 +30,28 @@ namespace FundooRepository.Repository
         /// </summary>
         private readonly UserContext _userContext;
 
-<<<<<<< HEAD
         /// <summary>
         /// Constructor for class
         /// </summary>
         /// <param name="configuration">passing configuration</param>
         /// <param name="userContext">passing userContext</param>
-=======
->>>>>>> master
         public NotesRepository(IConfiguration configuration, UserContext userContext)
         {
             this.Configuration = configuration;
             this._userContext = userContext;
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// getter method for Configuring dependencies
         /// </summary>
-=======
->>>>>>> master
         public IConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Add notes
         /// </summary>
         /// <param name="notes">passing NotesModel</param>
-<<<<<<< HEAD
         /// <returns>added or not </returns>
-=======
         /// <returns>string as note added or not</returns>
->>>>>>> master
         public async Task<string> AddNote(NotesModel notes)
         {
             try
@@ -84,21 +72,12 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
-<<<<<<< HEAD
         
-        /// <summary>
-        /// List of Notes
-        /// </summary>
-        /// <param name="userId">passing Id</param>
-        /// <returns>List of Notes</returns>
-=======
-
         /// <summary>
         /// show all notes
         /// </summary>
         /// <param name="userId">long UserId</param>
         /// <returns>list of NotesModel</returns>
->>>>>>> master
         public async Task<List<NotesModel>> ShowNotes(long userId)
         {
             try
@@ -110,11 +89,7 @@ namespace FundooRepository.Repository
                 }
                 else
                 {
-<<<<<<< HEAD
                     throw new ArgumentNullException("You Don't have Notes!");
-=======
-                    throw new Exception("You Don't have Notes!");
->>>>>>> master
                 }
             }
             catch (Exception e)
@@ -124,19 +99,11 @@ namespace FundooRepository.Repository
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Uploading Image
         /// </summary>
         /// <param name="file">IFormFile type</param>
         /// <param name="userId">User Id</param>
         /// <returns>Uploaded or not</returns>
-=======
-        /// Uploading Image to cloudinary
-        /// </summary>
-        /// <param name="file">passing IFormFile format</param>
-        /// <param name="userId">long userId</param>
-        /// <returns>upload or not</returns>
->>>>>>> master
         public async Task<string> UploadImg(IFormFile file, long userId)
         {
             try
@@ -148,10 +115,6 @@ namespace FundooRepository.Repository
                                                     "dwpsmsxy6",
                                                     "171559438548485",
                                                     "Cw3WujFZNaBxKYc0K0pj3dhKExg"));
-<<<<<<< HEAD
-=======
-
->>>>>>> master
                     var uploadImage = new ImageUploadParams()
                     {
                         File = new FileDescription(file.FileName, file.OpenReadStream()),
@@ -175,17 +138,11 @@ namespace FundooRepository.Repository
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Update Note
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
         /// <returns>Update or not</returns>
-=======
-        /// update notes
-        /// </summary>
-        /// <param name="notesModel">passing NotesModel</param>
-        /// <returns>message updated or not</returns>
->>>>>>> master
+
         public async Task<string> UpdateNotes(NotesModel notesModel)
         {
             try
@@ -214,7 +171,6 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
-<<<<<<< HEAD
 
         /// <summary>
         /// Delete Note
@@ -223,16 +179,6 @@ namespace FundooRepository.Repository
         /// <param name="userId">and userId</param>
         /// <returns>deleted or not</returns>
         public async Task<string> DeleteNote(long noteId, long userId)
-=======
-        
-        /// <summary>
-        /// Deleting note
-        /// </summary>
-        /// <param name="NoteId">long noteId</param>
-        /// <param name="UserId">long UserId</param>
-        /// <returns>Deleted or not message</returns>
-        public async Task<string> DeleteNote(long NoteId, long UserId)
->>>>>>> master
         {
             try
             {
@@ -255,17 +201,10 @@ namespace FundooRepository.Repository
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Restore Note
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
         /// <returns>restored or not</returns>
-=======
-        /// Restore note
-        /// </summary>
-        /// <param name="notesModel">passing NotesModel</param>
-        /// <returns>restore or not</returns>
->>>>>>> master
         public async Task<string> RestoreNote(NotesModel notesModel)
         {
             try
@@ -291,11 +230,7 @@ namespace FundooRepository.Repository
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// changing Color
-=======
-        /// changing color of note
->>>>>>> master
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
         /// <returns>color changed or not</returns>
@@ -323,26 +258,15 @@ namespace FundooRepository.Repository
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// note Archive
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
         /// <returns>done or not</returns>
-=======
-        /// archive notes
-        /// </summary>
-        /// <param name="notesModel">passing NotesModel</param>
-        /// <returns>archived or not</returns>
->>>>>>> master
         public async Task<string> Archive(NotesModel notesModel)
         {
             try
             {
-<<<<<<< HEAD
                 var checkArchive = this._userContext.Notes.Where<NotesModel>(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
-=======
-                var checkArchive = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
->>>>>>> master
                 if (checkArchive != null)
                 {
                     checkArchive.Status = checkArchive.Status == 0 ? 1 : 0;
@@ -395,11 +319,7 @@ namespace FundooRepository.Repository
         /// Move to Trash Notes
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
-<<<<<<< HEAD
         /// <returns>trashed or not</returns>
-=======
-        /// <returns>Trashed or not</returns>
->>>>>>> master
         public async Task<string> Trash(NotesModel notesModel)
         {
             try
@@ -427,7 +347,6 @@ namespace FundooRepository.Repository
         /// <summary>
         /// Show Archive Notes
         /// </summary>
-<<<<<<< HEAD
         /// <param name="Id">Passing ID</param>
         /// <returns>list of notes archived</returns>
         public async Task<List<NotesModel>> ShowArchiveNotes(long Id)
@@ -438,18 +357,6 @@ namespace FundooRepository.Repository
                 if (checkStatus >= 1)
                 {
                     return await this._userContext.Notes.Where(e => e.Status == 1 && e.UserId == Id).ToListAsync();
-=======
-        /// <param name="Id">passing long UserId</param>
-        /// <returns>list or archived notes</returns>
-        public async Task<List<NotesModel>> ShowArchiveNotes(long id)
-        {
-            try
-            {
-                var checkStatus = this._userContext.Notes.Where(e => e.UserId == id).Count();
-                if (checkStatus >= 1)
-                {
-                    return await this._userContext.Notes.Where(e => e.Status == 1 && e.UserId == id).ToListAsync();
->>>>>>> master
                 }
                  else
                 {
@@ -465,13 +372,8 @@ namespace FundooRepository.Repository
         /// <summary>
         /// show Trash Notes
         /// </summary>
-<<<<<<< HEAD
         /// <param name="UserId">passing UserId</param>
         /// <returns>List of trashed list</returns>
-=======
-        /// <param name="UserId">long UserId</param>
-        /// <returns>list of trashed notes</returns>
->>>>>>> master
         public async Task<List<NotesModel>> ShowTrashNotes(long UserId)
         {
             try
@@ -492,8 +394,4 @@ namespace FundooRepository.Repository
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

@@ -18,19 +18,10 @@ namespace FundoManager.Manager
     /// </summary>
     public class UserManager : IUserManager
     {
-<<<<<<< HEAD
         private readonly IUserRepository _repository;
-=======
         /// <summary>
         /// Declare IUserRepository for perform operations on it
         /// </summary>
-        private readonly IUserRepository _repository;
-
-        /// <summary>
-        /// for assign to private variable
-        /// </summary>
-        /// <param name="repository">passing IUserRepository variable</param>
->>>>>>> master
         public UserManager(IUserRepository repository)
         {
             this._repository = repository;
