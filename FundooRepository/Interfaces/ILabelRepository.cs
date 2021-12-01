@@ -8,9 +8,10 @@ namespace FundooRepository.Interfaces
     public interface ILabelRepository
     {
         Task<string> CreateLabel(CreateLabelModel createLabel);
-        Task<List<string>> labelList(long UserId);
+        Task<List<string>> LabelList(long UserId);
         Task<string> EditLabelName(EditLabelModel editLabelModel);
         Task<string> DeleteLabels(string LabelName, long UserId);
         List<NotesModel> ShowlabelNotes(long UserId, string LabelName);
+        Task<string> Delete(long userId, string labelNames);
     }
 }

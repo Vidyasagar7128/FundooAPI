@@ -21,6 +21,7 @@ namespace FundooModels
         public int Status { get; set; }
         [DefaultValue("false")]
         public bool Pin { get; set; }
+        [DefaultValue("Home")]
         public long? LabelId { get; set; }
         [ForeignKey("LabelId")]
         public virtual CreateLabelModel Label { get; set; }

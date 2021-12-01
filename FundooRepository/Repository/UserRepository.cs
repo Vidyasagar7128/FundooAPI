@@ -19,6 +19,7 @@ namespace FundooRepository.Repository
     using FundooModels;
     using FundooRepository.Context;
     using FundooRepository.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;

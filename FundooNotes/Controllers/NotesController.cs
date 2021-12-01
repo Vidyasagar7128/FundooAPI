@@ -14,7 +14,8 @@ namespace FundooNotes.Controllers
     using FundooModels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    
+    using Microsoft.Extensions.Logging;
+
 
     //[Authorize]
     [ApiController]
@@ -22,9 +23,11 @@ namespace FundooNotes.Controllers
     public class NotesController : Controller
     {
         private readonly INotesManager _notesManager;
-        public NotesController(INotesManager notesManager)
+        private readonly ILogger<NotesController> _logger;
+        public NotesController(INotesManager notesManager, ILogger<NotesController> logger)
         {
             this._notesManager = notesManager;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace FundooNotes.Controllers
                 var result = await this._notesManager.AddNewNote(notesModel);
                 if (result.Equals("Note Added Succesfully!"))
                 {
+                    _logger.LogInformation($"Notes Created by: {notesModel.Title} Title");
                     return this.Ok(new ResponseModel<string>()
                     {
                         Status = true,
@@ -104,6 +108,7 @@ namespace FundooNotes.Controllers
                 List<NotesModel> result = await this._notesManager.ShowAllNotes(UserId);
                 if (result != null)
                 {
+                    this._logger.LogInformation($"List of Notes!");
                     return this.Ok(new { Status = true, Message = "Data is available", Data = result });
                 }
                 else

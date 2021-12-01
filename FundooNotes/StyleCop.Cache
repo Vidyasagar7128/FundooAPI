@@ -4,7 +4,7 @@
     <timestamps>
       <styleCop>2021/11/29 21:16:12.151</styleCop>
       <settingsFile>2021/11/29 21:16:12.124</settingsFile>
-      <sourceFile>2021/11/30 09:01:29.437</sourceFile>
+      <sourceFile>2021/11/30 21:41:02.967</sourceFile>
       <parser>2021/11/29 21:16:12.151</parser>
       <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -24,35 +24,46 @@
     <violations>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The class must have a documentation header.</context>
-        <line>21</line>
+        <line>22</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The field must have a documentation header.</context>
-        <line>23</line>
+        <line>24</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
         <context>Field names must not start with an underscore.</context>
-        <line>23</line>
+        <line>24</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The field must have a documentation header.</context>
+        <line>25</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
+        <context>Field names must not start with an underscore.</context>
+        <line>25</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The constructor must have a documentation header.</context>
-        <line>25</line>
+        <line>26</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
+        <context>Adjacent elements must be separated by a blank line.</context>
+        <line>26</line>
         <warning>False</warning>
       </violation>
     </violations>
   </sourcecode>
-  <project key="-1671180615">
-    <configuration>
-    </configuration>
-  </project>
   <sourcecode name="NotesController.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2021/11/29 21:16:12.151</styleCop>
       <settingsFile>2021/11/29 21:16:12.124</settingsFile>
-      <sourceFile>2021/11/30 13:57:55.929</sourceFile>
+      <sourceFile>2021/11/30 21:59:50.489</sourceFile>
       <parser>2021/11/29 21:16:12.151</parser>
       <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -72,404 +83,494 @@
     <violations>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
         <context>The code must not contain multiple blank lines in a row.</context>
-        <line>18</line>
+        <line>19</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
         <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>19</line>
-        <index>688</index>
-        <endIndex>700</endIndex>
-        <startLine>19</startLine>
+        <line>20</line>
+        <index>725</index>
+        <endIndex>737</endIndex>
+        <startLine>20</startLine>
         <startColumn>5</startColumn>
-        <endLine>19</endLine>
+        <endLine>20</endLine>
         <endColumn>17</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The class must have a documentation header.</context>
-        <line>22</line>
+        <line>23</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The field must have a documentation header.</context>
-        <line>24</line>
+        <line>25</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
         <context>Field names must not start with an underscore.</context>
-        <line>24</line>
+        <line>25</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The field must have a documentation header.</context>
+        <line>26</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
+        <context>Field names must not start with an underscore.</context>
+        <line>26</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The constructor must have a documentation header.</context>
-        <line>25</line>
+        <line>27</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
         <context>Adjacent elements must be separated by a blank line.</context>
-        <line>25</line>
+        <line>27</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
+        <context>The call to _logger must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
+        <line>47</line>
+        <index>1717</index>
+        <endIndex>1723</endIndex>
+        <startLine>47</startLine>
+        <startColumn>21</startColumn>
+        <endLine>47</endLine>
+        <endColumn>27</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
         <context>The documentation text within the summary tag contains incorrectly spelled words: 'cloudinary'</context>
-        <line>73</line>
+        <line>77</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
         <context>The documentation text within the param tag contains incorrectly spelled words: 'Iform'</context>
-        <line>73</line>
+        <line>77</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementReturnValueDocumentationMustHaveText" ruleCheckId="SA1616">
         <context>The returns section in the documentation header must not be empty.</context>
-        <line>73</line>
+        <line>77</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
         <context>Adjacent elements must be separated by a blank line.</context>
-        <line>73</line>
+        <line>77</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementDocumentationHeaderMustBePrecededByBlankLine" ruleCheckId="SA1514">
         <context>A documentation header must be preceded by a blank line or must be the first item in its scope.</context>
-        <line>65</line>
+        <line>69</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to _notesManager must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>77</line>
-        <index>2655</index>
-        <endIndex>2667</endIndex>
-        <startLine>77</startLine>
+        <line>81</line>
+        <index>2913</index>
+        <endIndex>2925</endIndex>
+        <startLine>81</startLine>
         <startColumn>36</startColumn>
-        <endLine>77</endLine>
+        <endLine>81</endLine>
         <endColumn>48</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="CommasMustBeSpacedCorrectly" ruleCheckId="SA1001">
         <context>Invalid spacing around the comma.</context>
-        <line>77</line>
-        <index>2682</index>
-        <endIndex>2682</endIndex>
-        <startLine>77</startLine>
+        <line>81</line>
+        <index>2940</index>
+        <endIndex>2940</endIndex>
+        <startLine>81</startLine>
         <startColumn>63</startColumn>
-        <endLine>77</endLine>
+        <endLine>81</endLine>
         <endColumn>63</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
         <context>Variable names and private field names must start with a lower-case letter: UserId.</context>
-        <line>100</line>
+        <line>104</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="ClosingCurlyBracketsMustBeSpacedCorrectly" ruleCheckId="SA1013">
         <context>Invalid spacing around the closing curly bracket.</context>
-        <line>111</line>
-        <index>3969</index>
-        <endIndex>3969</endIndex>
-        <startLine>111</startLine>
+        <line>116</line>
+        <index>4296</index>
+        <endIndex>4296</endIndex>
+        <startLine>116</startLine>
         <startColumn>128</startColumn>
-        <endLine>111</endLine>
+        <endLine>116</endLine>
         <endColumn>128</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
         <context>Variable names and private field names must start with a lower-case letter: NoteId.</context>
-        <line>164</line>
+        <line>169</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
         <context>Variable names and private field names must start with a lower-case letter: UserId.</context>
-        <line>164</line>
+        <line>169</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementParameterDocumentationMustHaveText" ruleCheckId="SA1614">
         <context>The documentation text within the param tag for the '&lt;param name="notesModel" /&gt;' parameter must not be empty.</context>
-        <line>235</line>
+        <line>240</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the if statement must be wrapped in opening and closing curly brackets.</context>
-        <line>241</line>
+        <line>246</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the else statement must be wrapped in opening and closing curly brackets.</context>
-        <line>243</line>
+        <line>248</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'if' is invalid.</context>
-        <line>240</line>
-        <index>8393</index>
-        <endIndex>8394</endIndex>
-        <startLine>240</startLine>
+        <line>245</line>
+        <index>8720</index>
+        <endIndex>8721</endIndex>
+        <startLine>245</startLine>
         <startColumn>17</startColumn>
-        <endLine>240</endLine>
+        <endLine>245</endLine>
         <endColumn>18</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="ClosingCurlyBracketsMustBeSpacedCorrectly" ruleCheckId="SA1013">
         <context>Invalid spacing around the closing curly bracket.</context>
-        <line>241</line>
-        <index>8511</index>
-        <endIndex>8511</endIndex>
-        <startLine>241</startLine>
+        <line>246</line>
+        <index>8838</index>
+        <endIndex>8838</endIndex>
+        <startLine>246</startLine>
         <startColumn>83</startColumn>
-        <endLine>241</endLine>
+        <endLine>246</endLine>
         <endColumn>83</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'catch' is invalid.</context>
-        <line>245</line>
-        <index>8671</index>
-        <endIndex>8675</endIndex>
-        <startLine>245</startLine>
+        <line>250</line>
+        <index>8998</index>
+        <endIndex>9002</endIndex>
+        <startLine>250</startLine>
         <startColumn>13</startColumn>
-        <endLine>245</endLine>
+        <endLine>250</endLine>
         <endColumn>17</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementParameterDocumentationMustHaveText" ruleCheckId="SA1614">
         <context>The documentation text within the param tag for the '&lt;param name="notesModel" /&gt;' parameter must not be empty.</context>
-        <line>258</line>
+        <line>263</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
         <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
-        <line>303</line>
+        <line>308</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The method must have a documentation header.</context>
-        <line>306</line>
+        <line>311</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the if statement must be wrapped in opening and closing curly brackets.</context>
-        <line>312</line>
+        <line>317</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the else statement must be wrapped in opening and closing curly brackets.</context>
-        <line>314</line>
+        <line>319</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
         <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
-        <line>320</line>
+        <line>325</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to _notesManager must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>310</line>
-        <index>10956</index>
-        <endIndex>10968</endIndex>
-        <startLine>310</startLine>
+        <line>315</line>
+        <index>11283</index>
+        <endIndex>11295</endIndex>
+        <startLine>315</startLine>
         <startColumn>36</startColumn>
-        <endLine>310</endLine>
+        <endLine>315</endLine>
         <endColumn>48</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to NotFound must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>318</line>
-        <index>11386</index>
-        <endIndex>11393</endIndex>
-        <startLine>318</startLine>
+        <line>323</line>
+        <index>11713</index>
+        <endIndex>11720</endIndex>
+        <startLine>323</startLine>
         <startColumn>24</startColumn>
-        <endLine>318</endLine>
+        <endLine>323</endLine>
         <endColumn>31</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'catch' is invalid.</context>
-        <line>316</line>
-        <index>11328</index>
-        <endIndex>11332</endIndex>
-        <startLine>316</startLine>
+        <line>321</line>
+        <index>11655</index>
+        <endIndex>11659</endIndex>
+        <startLine>321</startLine>
         <startColumn>13</startColumn>
-        <endLine>316</endLine>
+        <endLine>321</endLine>
         <endColumn>17</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The method must have a documentation header.</context>
-        <line>323</line>
+        <line>328</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the if statement must be wrapped in opening and closing curly brackets.</context>
-        <line>329</line>
+        <line>334</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the else statement must be wrapped in opening and closing curly brackets.</context>
-        <line>331</line>
+        <line>336</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
         <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
-        <line>337</line>
+        <line>342</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
         <context>Variable names and private field names must start with a lower-case letter: Id.</context>
-        <line>323</line>
+        <line>328</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to _notesManager must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>327</line>
-        <index>11681</index>
-        <endIndex>11693</endIndex>
-        <startLine>327</startLine>
+        <line>332</line>
+        <index>12008</index>
+        <endIndex>12020</endIndex>
+        <startLine>332</startLine>
         <startColumn>49</startColumn>
-        <endLine>327</endLine>
+        <endLine>332</endLine>
         <endColumn>61</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to Ok must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>329</line>
-        <index>11781</index>
-        <endIndex>11782</endIndex>
-        <startLine>329</startLine>
+        <line>334</line>
+        <index>12108</index>
+        <endIndex>12109</endIndex>
+        <startLine>334</startLine>
         <startColumn>28</startColumn>
-        <endLine>329</endLine>
+        <endLine>334</endLine>
         <endColumn>29</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to BadRequest must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>331</line>
-        <index>11904</index>
-        <endIndex>11913</endIndex>
-        <startLine>331</startLine>
+        <line>336</line>
+        <index>12231</index>
+        <endIndex>12240</endIndex>
+        <startLine>336</startLine>
         <startColumn>28</startColumn>
-        <endLine>331</endLine>
+        <endLine>336</endLine>
         <endColumn>37</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to NotFound must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>335</line>
-        <index>12080</index>
-        <endIndex>12087</endIndex>
-        <startLine>335</startLine>
+        <line>340</line>
+        <index>12407</index>
+        <endIndex>12414</endIndex>
+        <startLine>340</startLine>
         <startColumn>24</startColumn>
-        <endLine>335</endLine>
+        <endLine>340</endLine>
         <endColumn>31</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'catch' is invalid.</context>
-        <line>333</line>
-        <index>12022</index>
-        <endIndex>12026</endIndex>
-        <startLine>333</startLine>
+        <line>338</line>
+        <index>12349</index>
+        <endIndex>12353</endIndex>
+        <startLine>338</startLine>
         <startColumn>13</startColumn>
-        <endLine>333</endLine>
+        <endLine>338</endLine>
         <endColumn>17</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="OpeningParenthesisMustBeSpacedCorrectly" ruleCheckId="SA1008">
         <context>Invalid spacing around the opening parenthesis.</context>
-        <line>335</line>
-        <index>12089</index>
-        <endIndex>12089</endIndex>
-        <startLine>335</startLine>
+        <line>340</line>
+        <index>12416</index>
+        <endIndex>12416</endIndex>
+        <startLine>340</startLine>
         <startColumn>33</startColumn>
-        <endLine>335</endLine>
+        <endLine>340</endLine>
         <endColumn>33</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
         <context>The method must have a documentation header.</context>
-        <line>340</line>
+        <line>345</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the if statement must be wrapped in opening and closing curly brackets.</context>
-        <line>346</line>
+        <line>351</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsMustNotBeOmitted" ruleCheckId="SA1503">
         <context>The body of the else statement must be wrapped in opening and closing curly brackets.</context>
-        <line>348</line>
+        <line>353</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustBeginWithLowerCaseLetter" ruleCheckId="SA1306">
         <context>Variable names and private field names must start with a lower-case letter: UserId.</context>
-        <line>340</line>
+        <line>345</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to _notesManager must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>344</line>
-        <index>12368</index>
-        <endIndex>12380</endIndex>
-        <startLine>344</startLine>
+        <line>349</line>
+        <index>12695</index>
+        <endIndex>12707</endIndex>
+        <startLine>349</startLine>
         <startColumn>49</startColumn>
-        <endLine>344</endLine>
+        <endLine>349</endLine>
         <endColumn>61</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to Ok must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>346</line>
-        <index>12469</index>
-        <endIndex>12470</endIndex>
-        <startLine>346</startLine>
+        <line>351</line>
+        <index>12796</index>
+        <endIndex>12797</endIndex>
+        <startLine>351</startLine>
         <startColumn>28</startColumn>
-        <endLine>346</endLine>
+        <endLine>351</endLine>
         <endColumn>29</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to BadRequest must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>348</line>
-        <index>12585</index>
-        <endIndex>12594</endIndex>
-        <startLine>348</startLine>
+        <line>353</line>
+        <index>12912</index>
+        <endIndex>12921</endIndex>
+        <startLine>353</startLine>
         <startColumn>28</startColumn>
-        <endLine>348</endLine>
+        <endLine>353</endLine>
         <endColumn>37</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixCallsCorrectly" ruleCheckId="SA1126">
         <context>The call to NotFound must begin with the 'this.', 'base.', 'object.' or 'NotesController.' or 'Controller.' prefix to indicate the intended method call. </context>
-        <line>352</line>
-        <index>12735</index>
-        <endIndex>12742</endIndex>
-        <startLine>352</startLine>
+        <line>357</line>
+        <index>13062</index>
+        <endIndex>13069</endIndex>
+        <startLine>357</startLine>
         <startColumn>24</startColumn>
-        <endLine>352</endLine>
+        <endLine>357</endLine>
         <endColumn>31</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'if' is invalid.</context>
-        <line>345</line>
-        <index>12419</index>
-        <endIndex>12420</endIndex>
-        <startLine>345</startLine>
+        <line>350</line>
+        <index>12746</index>
+        <endIndex>12747</endIndex>
+        <startLine>350</startLine>
         <startColumn>17</startColumn>
-        <endLine>345</endLine>
+        <endLine>350</endLine>
         <endColumn>18</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
         <context>The spacing around the keyword 'catch' is invalid.</context>
-        <line>350</line>
-        <index>12677</index>
-        <endIndex>12681</endIndex>
-        <startLine>350</startLine>
+        <line>355</line>
+        <index>13004</index>
+        <endIndex>13008</endIndex>
+        <startLine>355</startLine>
         <startColumn>13</startColumn>
-        <endLine>350</endLine>
+        <endLine>355</endLine>
         <endColumn>17</endColumn>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <project key="-1671180615">
+    <configuration>
+    </configuration>
+  </project>
+  <sourcecode name="LabelController.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2021/11/29 21:16:12.151</styleCop>
+      <settingsFile>2021/11/29 21:16:12.124</settingsFile>
+      <sourceFile>2021/11/30 22:24:51.092</sourceFile>
+      <parser>2021/11/29 21:16:12.151</parser>
+      <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2021/11/29 21:16:12.151</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2021/11/29 21:16:12.151</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2021/11/29 21:16:12.151</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustHaveSummary" ruleCheckId="SA1604">
+        <context>The documentation header must have a summary tag.</context>
+        <line>20</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="DocumentationLinesMustBeginWithSingleSpace" ruleCheckId="SA1004">
+        <context>The documentation header line must start with a single space.</context>
+        <line>17</line>
+        <index>652</index>
+        <endIndex>665</endIndex>
+        <startLine>17</startLine>
+        <startColumn>5</startColumn>
+        <endLine>17</endLine>
+        <endColumn>18</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The field must have a documentation header.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
+        <context>Field names must not start with an underscore.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The constructor must have a documentation header.</context>
+        <line>24</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementReturnValueDocumentationMustHaveText" ruleCheckId="SA1616">
+        <context>The returns section in the documentation header must not be empty.</context>
+        <line>36</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustNotBeCopiedAndPasted" ruleCheckId="SA1625">
+        <context>The documentation header contains two or more identical documentation strings. The only documentation text which may be duplicated is 'The parameter is not used.'.</context>
+        <line>63</line>
         <warning>False</warning>
       </violation>
     </violations>

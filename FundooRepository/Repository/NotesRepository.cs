@@ -7,7 +7,6 @@
 
 namespace FundooRepository.Repository
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -62,16 +61,16 @@ namespace FundooRepository.Repository
         /// <summary>
         /// show all notes
         /// </summary>
-        /// <param name="UserId">long UserId</param>
+        /// <param name="userId">long UserId</param>
         /// <returns>list of NotesModel</returns>
-        public async Task<List<NotesModel>> ShowNotes(long UserId)
+        public async Task<List<NotesModel>> ShowNotes(long userId)
         {
             try
             {
-                var notesLength = this._userContext.Notes.Where(e => e.UserId == UserId).ToList();
+                var notesLength = this._userContext.Notes.Where(e => e.UserId == userId).ToList();
                 if (notesLength.Count >= 1)
                 {
-                    return await this._userContext.Notes.Where(e => e.UserId == UserId).ToListAsync<NotesModel>();
+                    return await this._userContext.Notes.Where(e => e.UserId == userId).ToListAsync<NotesModel>();
                 }
                 else
                 {
@@ -335,14 +334,14 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="Id">passing long UserId</param>
         /// <returns>list or archived notes</returns>
-        public async Task<List<NotesModel>> ShowArchiveNotes(long Id)
+        public async Task<List<NotesModel>> ShowArchiveNotes(long id)
         {
             try
             {
-                var checkStatus = this._userContext.Notes.Where(e => e.UserId == Id).Count();
+                var checkStatus = this._userContext.Notes.Where(e => e.UserId == id).Count();
                 if (checkStatus >= 1)
                 {
-                    return await this._userContext.Notes.Where(e => e.Status == 1 && e.UserId == Id).ToListAsync();
+                    return await this._userContext.Notes.Where(e => e.Status == 1 && e.UserId == id).ToListAsync();
                 }
                  else
                 {

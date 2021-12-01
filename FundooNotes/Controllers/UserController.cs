@@ -14,6 +14,7 @@ namespace FundooNotes.Controllers
     using FundoManager.Interfaces;
     using FundooModels;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using StackExchange.Redis;
 
     [ApiController]
@@ -21,10 +22,11 @@ namespace FundooNotes.Controllers
     public class UserController : Controller
     {
         private readonly IUserManager _userManager;
-
-        public UserController(IUserManager manager)
+        private readonly ILogger<UserController> _logger;
+        public UserController(IUserManager manager, ILogger<UserController> logger)
         {
             this._userManager = manager;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -43,6 +45,7 @@ namespace FundooNotes.Controllers
                     string result = this._userManager.Register(userData);
                     if (result.Equals("Registration Done!"))
                     {
+                        this._logger.LogInformation($"Registration done with {userData.Email} Id.");
                         return this.Ok(new ResponseModel<string>()
                         {
                             Status = true,
@@ -51,6 +54,7 @@ namespace FundooNotes.Controllers
                     }
                     else
                     {
+                        this._logger.LogWarning($"{result}");
                         return this.BadRequest(new ResponseModel<string>()
                         {
                             Status = false,
@@ -60,6 +64,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
+                    this._logger.LogWarning($"Validation Error!");
                     return this.BadRequest(new ResponseModel<string>()
                     {
                         Status = false,
@@ -69,6 +74,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
+                this._logger.LogError(e.Message);
                 return this.NotFound(new ResponseModel<string>()
                 {
                     Status = false,
@@ -97,15 +103,18 @@ namespace FundooNotes.Controllers
                     string firstName = database.StringGet("Firstname");
                     string lastName = database.StringGet("Lastname");
                     SignUpModel data = new SignUpModel { FirstName = firstName, LastName = lastName, Email = loginDetails.Email };
+                    this._logger.LogInformation($"Welcome again {loginDetails.Email}");
                     return this.Ok(new { Status = true, Data = data, Token = this._userManager.GetJwtToken(loginDetails.Email) });
                 }
                 else
                 {
+                    this._logger.LogWarning("Something went Wrong!");
                     return this.BadRequest(new { Status = false, Message = "Something went Wrong!" });
                 }
             }
             catch (Exception e)
             {
+                this._logger.LogError($"Error : {e.Message}");
                 return this.NotFound(new ResponseModel<string>()
                 {
                     Status = false,
@@ -128,6 +137,7 @@ namespace FundooNotes.Controllers
                 var result = this._userManager.SendEmailResetPassword(email);
                 if (result.Equals("Email does not Exist!"))
                 {
+                    this._logger.LogWarning(result.ToString());
                     return this.BadRequest(new ResponseModel<string>() 
                     { 
                         Status = false,
@@ -137,6 +147,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
+                    this._logger.LogInformation($"Email sent to {email}");
                     return this.Ok(new ResponseModel<string>()
                     {
                         Status = true,
@@ -147,6 +158,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception e)
             {
+                this._logger.LogError(e.Message.ToString());
                 return this.NotFound(new ResponseModel<string>()
                 {
                     Status = false,
@@ -169,15 +181,18 @@ namespace FundooNotes.Controllers
                 var result = await this._userManager.ResetPass(resetPasswordModel);
                 if (result.Equals("Password Changed!"))
                 {
+                    this._logger.LogInformation($"Password changed succesfully!");
                     return this.Ok(new { Status = true, Message = result });
                 }
                 else
                 {
+                    this._logger.LogWarning("Something went Wrong!");
                     return this.BadRequest(new { Status = false, Message = "Something went Wrong!" });
                 }
             }
             catch (Exception e)
             {
+                this._logger.LogError($"Error : {e.Message}");
                 return this.NotFound(new { Status = false, Message = e.Message });
             }
         }

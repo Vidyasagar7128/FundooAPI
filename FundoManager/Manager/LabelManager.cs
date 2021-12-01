@@ -35,7 +35,7 @@ namespace FundoManager.Manager
         {
             try
             {
-                return await _labelRepository.labelList(UserId);
+                return await _labelRepository.LabelList(UserId);
             }
             catch (Exception e)
             {
@@ -81,6 +81,17 @@ namespace FundoManager.Manager
             try
             {
                 return _labelRepository.ShowlabelNotes(UserId,LabelName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<string> DelLabel(long userId, string labelNames)
+        {
+            try
+            {
+                return await _labelRepository.Delete(userId, labelNames);
             }
             catch (Exception e)
             {

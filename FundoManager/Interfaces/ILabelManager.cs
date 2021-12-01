@@ -11,5 +11,6 @@ namespace FundoManager.Interfaces
         Task<string> EditLabel(EditLabelModel editLabelModel);
         Task<string> DeleteLabel(string LabelName, long UserId);
         List<NotesModel> ShowLabelLisData(long UserId, string LabelName);
+        Task<string> DelLabel(long userId, string labelNames);
     }
 }
