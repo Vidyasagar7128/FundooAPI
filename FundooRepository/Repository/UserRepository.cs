@@ -24,10 +24,22 @@ namespace FundooRepository.Repository
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
     using StackExchange.Redis;
-    
+
+    /// <summary>
+    /// User Repository
+    /// </summary>
     public class UserRepository : IUserRepository
     {
+        /// <summary>
+        /// DB Context of UserContext
+        /// </summary>
         private readonly UserContext _userContext;
+
+        /// <summary>
+        /// Constructor initializing parameters to variables
+        /// </summary>
+        /// <param name="configuration">passing IConfiguration</param>
+        /// <param name="userContext">passing UserContext</param>
         public UserRepository(IConfiguration configuration, UserContext userContext)
         {
             this.Configuration = configuration;
@@ -113,9 +125,9 @@ namespace FundooRepository.Repository
         /// <summary>
         /// JWT Token Generate
         /// </summary>
-        /// <param name="Email">SHA using Email</param>
+        /// <param name="email">SHA using Email</param>
         /// <returns>Jwt Token</returns>
-        public string JwtToken(string Email)
+        public string JwtToken(string email)
         {
             byte[] key = Encoding.UTF8.GetBytes(this.Configuration["SecretKey"]);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
@@ -123,7 +135,7 @@ namespace FundooRepository.Repository
             {
                 Subject = new ClaimsIdentity(new[] 
                 {
-                      new Claim(ClaimTypes.Name, Email)
+                      new Claim(ClaimTypes.Name, email)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)

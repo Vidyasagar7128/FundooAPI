@@ -17,12 +17,28 @@ namespace FundooNotes.Controllers
     using Microsoft.Extensions.Logging;
     using StackExchange.Redis;
 
+    /// <summary>
+    /// UserController for Users Actions
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+        /// <summary>
+        /// declaring ILogger variable for performing actions on users repo
+        /// </summary>
         private readonly IUserManager _userManager;
+
+        /// <summary>
+        /// declaring ILogger variable for Logging
+        /// </summary>
         private readonly ILogger<UserController> _logger;
+
+        /// <summary>
+        /// Constructor for UserController
+        /// </summary>
+        /// <param name="manager">passing IUserManager to assign its values to variables</param>
+        /// <param name="logger">passing ILogger for displays activities of users</param>
         public UserController(IUserManager manager, ILogger<UserController> logger)
         {
             this._userManager = manager;
