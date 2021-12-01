@@ -10,4 +10,11 @@
     <ProjectReference Include="..\FundooRepository\FundooRepository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Manager\NotesManager.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+  </ItemGroup>
+
 </Project>

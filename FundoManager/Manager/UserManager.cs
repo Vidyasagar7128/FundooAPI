@@ -10,7 +10,7 @@ namespace FundoManager.Manager
 {
     public class UserManager : IUserManager
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repository;
         public UserManager(IUserRepository repository)
         {
             this._repository = repository;
