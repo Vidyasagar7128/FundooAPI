@@ -85,7 +85,7 @@ namespace FundooRepository.Repository
                 var notesLength = this._userContext.Notes.Where(e => e.UserId == userId).ToList();
                 if (notesLength.Count >= 1)
                 {
-                    return await this._userContext.Notes.Where(e => e.UserId == userId).ToListAsync<NotesModel>();
+                    return await this._userContext.Notes.Where(e => e.UserId == userId && e.Status == 0).ToListAsync<NotesModel>();
                 }
                 else
                 {
