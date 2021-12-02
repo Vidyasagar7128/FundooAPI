@@ -86,15 +86,15 @@ namespace FundooNotes.Controllers
         /// Uploading Image to cloudinary
         /// </summary>
         /// <param name="file">IformFile type</param>
-        /// <param name="userId">User Is</param>
+        /// <param name="noteId">User Is</param>
         /// <returns></returns>
         [HttpPut]
         [Route("image")]
-        public async Task<IActionResult> UploadImage(IFormFile file, long userId)
+        public async Task<IActionResult> UploadImage(IFormFile file, long noteId)
         {
             try
             {
-                var result = await this._notesManager.AddImage(file, userId);
+                var result = await this._notesManager.AddImage(file, noteId);
                 if (result == "Image added Successfully")
                 {
                     return this.Ok(new { Status = true, Message = result });

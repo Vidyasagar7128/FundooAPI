@@ -56,13 +56,13 @@ namespace FundoManager.Manager
         /// upload Image
         /// </summary>
         /// <param name="file">passing IFormFile format input</param>
-        /// <param name="userId">passing Id</param>
+        /// <param name="noteId">passing Id</param>
         /// <returns>uploaded or not as string message</returns>
-        public async Task<string> AddImage(IFormFile file, long userId)
+        public async Task<string> AddImage(IFormFile file, long noteId)
         {
             try
             {
-                return await this._notesRepository.UploadImg(file,userId);
+                return await this._notesRepository.UploadImg(file, noteId);
             }
             catch (Exception e)
             {

@@ -1,97 +1,136 @@
-﻿using FundoManager.Interfaces;
-using FundooModels;
-using FundooRepository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LabelManager.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Gaikwad Vidyasagar"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FundoManager.Manager
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using FundoManager.Interfaces;
+    using FundooModels;
+    using FundooRepository.Interfaces;
+
+    /// <summary>
+    /// LabelManager handles the ILabelRepository interface
+    /// </summary>
     public class LabelManager : ILabelManager
     {
+        /// <summary>
+        /// created variable type of ILabelRepository
+        /// </summary>
         private readonly ILabelRepository _labelRepository;
+
+        /// <summary>
+        /// assign values to class private variables
+        /// </summary>
+        /// <param name="labelRepository">passing ILabelRepository parameter</param>
         public LabelManager(ILabelRepository labelRepository)
         {
-            _labelRepository = labelRepository;
+            this._labelRepository = labelRepository;
         }
+
+        /// <summary>
+        /// creating label for user
+        /// </summary>
+        /// <param name="createLabelModel">passing CreateLabelModel</param>
+        /// <returns>rstring return</returns>
         public async Task<string> CreateLabel(CreateLabelModel createLabelModel)
         {
             try
             {
-                return await _labelRepository.CreateLabel(createLabelModel);
+                return await this._labelRepository.CreateLabel(createLabelModel);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
-        /// Show Labels List
+        /// List of labels
         /// </summary>
-        /// <param name="createLabelModel"></param>
-        /// <returns></returns>
-        public async Task<List<string>> ShowLabelList(long UserId)
+        /// <param name="userId">passing userId</param>
+        /// <returns>list return</returns>
+        public async Task<List<string>> ShowLabelList(long userId)
         {
             try
             {
-                return await _labelRepository.LabelList(UserId);
+                return await this._labelRepository.LabelList(userId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
-        /// Edit Labels Name
+        /// edit labels
         /// </summary>
-        /// <param name="UserId"></param>
-        /// <param name="newLabel"></param>
-        /// <returns></returns>
+        /// <param name="editLabelModel">passing EditLabelModel</param>
+        /// <returns>string return</returns>
         public async Task<string> EditLabel(EditLabelModel editLabelModel)
         {
             try
             {
-                return await _labelRepository.EditLabelName(editLabelModel);
+                return await this._labelRepository.EditLabelName(editLabelModel);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
         /// Delete Labels
         /// </summary>
-        /// <param name="LabelName"></param>
-        /// <param name="UserId"></param>
-        /// <returns></returns>
-        public async Task<string> DeleteLabel(string LabelName, long UserId)
+        /// <param name="labelName">passing labelName</param>
+        /// <param name="userId">passing userId</param>
+        /// <returns>string return</returns>
+        public async Task<string> DeleteLabel(string labelName, long userId)
         {
             try
             {
-                return await _labelRepository.DeleteLabels(LabelName, UserId);
+                return await _labelRepository.DeleteLabels(labelName, userId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public List<NotesModel> ShowLabelLisData(long UserId, string LabelName)
+
+        /// <summary>
+        /// show Labels
+        /// </summary>
+        /// <param name="userId">passing userId</param>
+        /// <param name="labelName">passing labelName</param>
+        /// <returns>list return</returns>
+        public List<NotesModel> ShowLabelLisData(long userId, string labelName)
         {
             try
             {
-                return _labelRepository.ShowlabelNotes(UserId,LabelName);
+                return this._labelRepository.ShowlabelNotes(userId,labelName);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// delete Label
+        /// </summary>
+        /// <param name="userId">passing userId</param>
+        /// <param name="labelName">passing labelName</param>
+        /// <returns>string return</returns>
         public async Task<string> DelLabel(long userId, string labelNames)
         {
             try
             {
-                return await _labelRepository.Delete(userId, labelNames);
+                return await this._labelRepository.Delete(userId, labelNames);
             }
             catch (Exception e)
             {

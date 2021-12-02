@@ -16,14 +16,31 @@ namespace FundooRepository.Repository
     using FundooRepository.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
+
+    /// <summary>
+    /// LabelRepository class for ILabelRepository
+    /// </summary>
     public class LabelRepository : ILabelRepository
     {
+        /// <summary>
+        /// UserContext variable for database related
+        /// </summary>
         private readonly UserContext _userContext;
+
+        /// <summary>
+        /// assign values to class variable
+        /// </summary>
+        /// <param name="configuration">passing IConfiguration for configurations</param>
+        /// <param name="userContext">passing UserContext</param>
         public LabelRepository(IConfiguration configuration, UserContext userContext)
         {
             this.Configuration = configuration;
             this._userContext = userContext;
         }
+
+        /// <summary>
+        /// Gets and Sets for IConfiguration
+        /// </summary>
         public IConfiguration Configuration { get; set; }
 
         /// <summary>
@@ -119,7 +136,6 @@ namespace FundooRepository.Repository
                 if (checkLabelName != null)
                 {
                     this._userContext.Labels.Remove(checkLabelName);
-                    //this._userContext.Entry(checkLabelName).State = EntityState.Deleted;
                     await this._userContext.SaveChangesAsync();
                     return "Label Deleted!";
                 }
@@ -177,6 +193,13 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// for delete labels
+        /// </summary>
+        /// <param name="userId">passing userId</param>
+        /// <param name="labelNames">passing labelName</param>
+        /// <returns>string return</returns>
         public async Task<string> Delete(long userId, string labelNames)
         {
             try

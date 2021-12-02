@@ -14,13 +14,23 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    ///[Authorize]
+    /// <summary>
+    /// LabelController is responcible for Label API
+    /// </summary>
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LabelController : Controller
     {
+        /// <summary>
+        /// ILabelManager interface ty variable craeted
+        /// </summary>
         private readonly ILabelManager _labelManager;
 
+        /// <summary>
+        /// for assign values to private variable
+        /// </summary>
+        /// <param name="labelManager">ILabelManager type variable paramater</param>
         public LabelController(ILabelManager labelManager)
         {
             this._labelManager = labelManager;
@@ -30,7 +40,7 @@ namespace FundooNotes.Controllers
         /// Create Labels
         /// </summary>
         /// <param name="createLabelModel">passing CreateLabelModel</param>
-        /// <returns></returns>
+        /// <returns>string return</returns>
         [HttpPost]
         [Route("createlabel")]
         public async Task<IActionResult> LabelCreate([FromBody] CreateLabelModel createLabelModel)

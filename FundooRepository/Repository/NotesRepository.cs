@@ -102,13 +102,13 @@ namespace FundooRepository.Repository
         /// Uploading Image
         /// </summary>
         /// <param name="file">IFormFile type</param>
-        /// <param name="userId">User Id</param>
+        /// <param name="noteId">note Id</param>
         /// <returns>Uploaded or not</returns>
-        public async Task<string> UploadImg(IFormFile file, long userId)
+        public async Task<string> UploadImg(IFormFile file, long noteId)
         {
             try
             {
-                var checkNote = this._userContext.Notes.Where(e => e.UserId == userId).FirstOrDefault();
+                var checkNote = this._userContext.Notes.Where(e => e.NoteId == noteId).FirstOrDefault();
                 if (checkNote != null)
                 {
                     Cloudinary cloudinary = new Cloudinary(new Account(
