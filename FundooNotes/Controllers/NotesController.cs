@@ -12,12 +12,15 @@ namespace FundooNotes.Controllers
     using System.Threading.Tasks;
     using FundoManager.Interfaces;
     using FundooModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-
-    //[Authorize]
+    /// <summary>
+    /// NotesController handles the all routes of notes API
+    /// </summary>
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class NotesController : Controller
@@ -26,7 +29,17 @@ namespace FundooNotes.Controllers
         /// creating INotesManager variable _notesManager
         /// </summary>
         private readonly INotesManager _notesManager;
+
+        /// <summary>
+        /// create ILogger variable
+        /// </summary>
         private readonly ILogger<NotesController> _logger;
+
+        /// <summary>
+        /// assign values to private variables
+        /// </summary>
+        /// <param name="notesManager">passing INotesManager as variable</param>
+        /// <param name="logger">passing ILogger INotesManager as variable</param>
         public NotesController(INotesManager notesManager, ILogger<NotesController> logger)
         {
             this._notesManager = notesManager;
