@@ -19,6 +19,7 @@ namespace FundoManager.Interfaces
         Task<List<NotesModel>> TrashNotes(long UserId);
         Task<string> BackNotes(NotesModel notesModel);
         Task<string> AddImage(IFormFile file, long noteId);
+        Task<string> SetReminder(long id, string reminder);
     }
     
     

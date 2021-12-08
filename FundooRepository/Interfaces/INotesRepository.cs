@@ -20,5 +20,6 @@ namespace FundooRepository.Interfaces
         Task<List<NotesModel>> ShowTrashNotes(long UserId);
         Task<string> RestoreNote(NotesModel notesModel);
         Task<string> UploadImg(IFormFile file, long noteId);
+        Task<string> Reminder(long id, string reminder);
     }
 }

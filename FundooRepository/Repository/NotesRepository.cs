@@ -393,5 +393,34 @@ namespace FundooRepository.Repository
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// to Set Reminder
+        /// </summary>
+        /// <param name="id">Passing id</param>
+        /// <param name="reminder">Passing Reminder</param>
+        /// <returns>return string</returns>
+        public async Task<string> Reminder(long id,string reminder)
+        {
+            try
+            {
+                if (reminder != null)
+                {
+                    var newRemind = this._userContext.Notes.Where(e => e.NoteId == id).FirstOrDefault();
+                    newRemind.Reminder = reminder;
+                    this._userContext.Entry(newRemind).State = EntityState.Modified;
+                    await this._userContext.SaveChangesAsync();
+                    return "Reminder Set!";
+                }
+                else
+                {
+                    return "Failed to set Reminder.";
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

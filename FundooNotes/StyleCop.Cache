@@ -1,10 +1,78 @@
 <stylecopresultscache>
   <version>12</version>
+  <sourcecode name="LabelController.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2021/11/29 21:16:12.151</styleCop>
+      <settingsFile>2021/11/29 21:16:12.124</settingsFile>
+      <sourceFile>2021/12/02 07:21:12.952</sourceFile>
+      <parser>2021/11/29 21:16:12.151</parser>
+      <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2021/11/29 21:16:12.151</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2021/11/29 21:16:12.151</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2021/11/29 21:16:12.151</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2021/11/29 21:16:12.151</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
+        <context>The documentation text within the summary tag contains incorrectly spelled words: 'responcible'</context>
+        <line>23</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
+        <context>The documentation text within the summary tag contains incorrectly spelled words: 'craeted'</context>
+        <line>28</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="FieldNamesMustNotBeginWithUnderscore" ruleCheckId="SA1309">
+        <context>Field names must not start with an underscore.</context>
+        <line>28</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustBeSpelledCorrectly" ruleCheckId="SA1650">
+        <context>The documentation text within the param tag contains incorrectly spelled words: 'paramater'</context>
+        <line>34</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ConstructorSummaryDocumentationMustBeginWithStandardText" ruleCheckId="SA1642">
+        <context>The documentation text within the constructor's summary tag must begin with the text: Initializes a new instance of the &lt;see cref="LabelController" /&gt; class.</context>
+        <line>34</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementDocumentationMustNotBeCopiedAndPasted" ruleCheckId="SA1625">
+        <context>The documentation header contains two or more identical documentation strings. The only documentation text which may be duplicated is 'The parameter is not used.'.</context>
+        <line>73</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
+        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
+        <line>174</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementsMustBeDocumented" ruleCheckId="SA1600">
+        <context>The method must have a documentation header.</context>
+        <line>177</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <project key="-1671180615">
+    <configuration>
+    </configuration>
+  </project>
   <sourcecode name="NotesController.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2021/11/29 21:16:12.151</styleCop>
       <settingsFile>2021/11/29 21:16:12.124</settingsFile>
-      <sourceFile>2021/12/02 07:15:28.465</sourceFile>
+      <sourceFile>2021/12/08 08:58:41.217</sourceFile>
       <parser>2021/11/29 21:16:12.151</parser>
       <StyleCop.CSharp.DocumentationRules>2021/11/29 21:16:12.151</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-821778008</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -93,38 +161,22 @@
         <line>262</line>
         <warning>False</warning>
       </violation>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="KeywordsMustBeSpacedCorrectly" ruleCheckId="SA1000">
-        <context>The spacing around the keyword 'if' is invalid.</context>
-        <line>261</line>
-        <index>9363</index>
-        <endIndex>9364</endIndex>
-        <startLine>261</startLine>
-        <startColumn>17</startColumn>
-        <endLine>261</endLine>
-        <endColumn>18</endColumn>
-        <warning>False</warning>
-      </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="ClosingCurlyBracketsMustBeSpacedCorrectly" ruleCheckId="SA1013">
         <context>Invalid spacing around the closing curly bracket.</context>
         <line>262</line>
-        <index>9481</index>
-        <endIndex>9481</endIndex>
+        <index>9482</index>
+        <endIndex>9482</endIndex>
         <startLine>262</startLine>
         <startColumn>83</startColumn>
         <endLine>262</endLine>
         <endColumn>83</endColumn>
         <warning>False</warning>
       </violation>
-      <violation namespace="StyleCop.CSharp.DocumentationRules" rule="ElementParameterDocumentationMustHaveText" ruleCheckId="SA1614">
-        <context>The documentation text within the param tag for the '&lt;param name="notesModel" /&gt;' parameter must not be empty.</context>
-        <line>281</line>
-        <warning>False</warning>
-      </violation>
       <violation namespace="StyleCop.CSharp.SpacingRules" rule="OpeningParenthesisMustBeSpacedCorrectly" ruleCheckId="SA1008">
         <context>Invalid spacing around the opening parenthesis.</context>
         <line>378</line>
-        <index>13659</index>
-        <endIndex>13659</endIndex>
+        <index>13678</index>
+        <endIndex>13678</endIndex>
         <startLine>378</startLine>
         <startColumn>38</startColumn>
         <endLine>378</endLine>
@@ -133,6 +185,7 @@
       </violation>
     </violations>
   </sourcecode>
+<<<<<<< HEAD
   <sourcecode name="LabelController.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2021/11/29 21:16:12.151</styleCop>
@@ -235,4 +288,6 @@
       </violation>
     </violations>
   </sourcecode>
+=======
+>>>>>>> master
 </stylecopresultscache>

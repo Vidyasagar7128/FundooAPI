@@ -258,7 +258,7 @@ namespace FundooNotes.Controllers
             try
             {
                 var color = await this._notesManager.ChangeColor(notesModel);
-                if(color.Equals("Color Changed!"))
+                if (color.Equals("Color Changed!"))
                     return this.Ok(new { Status = true, Message = "Color Changed!"});
                 else
                 {
@@ -274,7 +274,7 @@ namespace FundooNotes.Controllers
         /// <summary>
         /// Check Archive Status Put into Archive and Remove from it.
         /// </summary>
-        /// <param name="notesModel"></param>
+        /// <param name="notesModel">Passing NotesModel</param>
         /// <returns>IActionResult of ArchiveStatus</returns>
         [HttpPut]
         [Route("archive")]
@@ -398,6 +398,34 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new { Status = false, Message = "Trash is Empty" });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.NotFound(new { Status = false, Message = e.Message });
+            }
+        }
+
+        /// <summary>
+        /// to Set Reminder
+        /// </summary>
+        /// <param name="id">Passing id</param>
+        /// <param name="reminder">Passing Reminder</param>
+        /// <returns>return string</returns>
+        [HttpPut]
+        [Route("reminder")]
+        public async Task<IActionResult> Reminder(long id, string reminder)
+        {
+            try
+            {
+                var result = await this._notesManager.SetReminder(id, reminder);
+                if (reminder.Equals("Reminder Set!"))
+                {
+                    return this.Ok(new { Status = true, Message = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = result });
                 }
             }
             catch (Exception e)
