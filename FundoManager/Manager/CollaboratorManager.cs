@@ -1,47 +1,81 @@
-﻿using FundoManager.Interfaces;
-using FundooModels;
-using FundooRepository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorManager.cs" company="Bridgelabz">
+//   Copyright © 2021 Company="BridgeLabz"
+// </copyright>
+// <creator name="Gaikwad Vidyasagar"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FundoManager.Manager
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using FundoManager.Interfaces;
+    using FundooModels;
+    using FundooRepository.Interfaces;
+
+    /// <summary>
+    /// CollaboratorManager handles CollaboratorRepository
+    /// </summary>
     public class CollaboratorManager : ICollaboratorManager
     {
+        /// <summary>
+        /// Creating ICollaboratorRepository's variable
+        /// </summary>
         private readonly ICollaboratorRepository _collaboratorRepository;
+
+        /// <summary>
+        /// Initializes ICollaboratorRepository's variable
+        /// </summary>
+        /// <param name="collaboratorRepository">Passing ICollaboratorRepository</param>
         public CollaboratorManager(ICollaboratorRepository collaboratorRepository)
         {
-            _collaboratorRepository = collaboratorRepository;
+            this._collaboratorRepository = collaboratorRepository;
         }
+        /// <summary>
+        /// Create collaborator
+        /// </summary>
+        /// <param name="noteShareModel">passing NoteShareModel</param>
+        /// <returns>return string</returns>
         public async Task<string> Collaborator(NoteShareModel noteShareModel)
         {
             try
             {
-                return await _collaboratorRepository.Create(noteShareModel);
+                return await this._collaboratorRepository.Create(noteShareModel);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public List<NotesModel> ShowCollab(long UserId)
+
+        /// <summary>
+        /// show list of Collaborations
+        /// </summary>
+        /// <param name="userId">Passing userId</param>
+        /// <returns>return List of Collaborations</returns>
+        public List<NotesModel> ShowCollab(long userId)
         {
             try
             {
-                return _collaboratorRepository.ShowCollaborator(UserId);
+                return this._collaboratorRepository.ShowCollaborator(userId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        public async Task<string> DelCollab(long UserId)
+
+        /// <summary>
+        /// remove Collaboration
+        /// </summary>
+        /// <param name="userId">Passing userId</param>
+        /// <returns>return string as done or not</returns>
+        public async Task<string> DelCollab(long userId)
         {
             try
             {
-                return await _collaboratorRepository.DeleteCollabs(UserId);
+                return await this._collaboratorRepository.DeleteCollabs(userId);
             }
             catch (Exception e)
             {
