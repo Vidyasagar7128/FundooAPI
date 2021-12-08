@@ -406,7 +406,7 @@ namespace FundooRepository.Repository
             {
                 if (reminder != null)
                 {
-                    var newRemind = this._userContext.Notes.Where(e => e.LabelId == id).FirstOrDefault();
+                    var newRemind = this._userContext.Notes.Where(e => e.NoteId == id).FirstOrDefault();
                     newRemind.Reminder = reminder;
                     this._userContext.Entry(newRemind).State = EntityState.Modified;
                     await this._userContext.SaveChangesAsync();
