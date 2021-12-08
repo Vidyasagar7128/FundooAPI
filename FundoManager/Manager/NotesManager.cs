@@ -240,5 +240,23 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// to Set Reminder
+        /// </summary>
+        /// <param name="id">Passing id</param>
+        /// <param name="reminder">Passing Reminder</param>
+        /// <returns>return string</returns>
+        public async Task<string> SetReminder(long id,string reminder)
+        {
+            try
+            {
+                return await this._notesRepository.Reminder(id,reminder);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
