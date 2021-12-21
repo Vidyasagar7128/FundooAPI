@@ -16,6 +16,7 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Primitives;
 
     /// <summary>
     /// NotesController handles the all routes of notes API
@@ -29,6 +30,7 @@ namespace FundooNotes.Controllers
         /// creating INotesManager variable _notesManager
         /// </summary>
         private readonly INotesManager _notesManager;
+        private StringValues head;
 
         /// <summary>
         /// create ILogger variable
@@ -47,6 +49,25 @@ namespace FundooNotes.Controllers
         }
 
         /// <summary>
+        /// For Header
+        /// </summary>
+        /// <returns></returns>
+
+        //public string GetHeaderValues()
+        //{
+        //    try
+        //    {
+        //        StringValues head;
+        //        Request.Headers.TryGetValue("Authorization", out head);
+        //        return head;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
+
+        /// <summary>
         /// adding notes
         /// </summary>
         /// <param name="notesModel">passing NotesModel model</param>
@@ -57,7 +78,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                var result = await this._notesManager.AddNewNote(notesModel);
+                Request.Headers.TryGetValue("Authorization", out this.head);
+                var result = await this._notesManager.AddNewNote(this.head, notesModel);
                 if (result.Equals("Note Added Succesfully!"))
                 {
                     this._logger.LogInformation($"Notes Created by: {notesModel.Title} Title");
@@ -117,15 +139,16 @@ namespace FundooNotes.Controllers
         /// <returns>returns IActionResult</returns>
         [HttpGet]
         [Route("allnotes")]
-        public async Task<IActionResult> AllNotes(long UserId)
+        public async Task<IActionResult> AllNotes()
         {
             try
             {
-                List<NotesModel> result = await this._notesManager.ShowAllNotes(UserId);
+                Request.Headers.TryGetValue("Authorization", out this.head);
+                List<NotesModel> result = await this._notesManager.ShowAllNotes(this.head);
                 if (result.Count >= 1)
                 {
                     this._logger.LogInformation($"List of Notes!");
-                    return this.Ok(new { Status = true, Message = "Data is available", Data = result });
+                    return this.Ok(new { Status = true, Message = "Notes fetched succesfully.", Data = result });
                 }
                 else
                 {
@@ -433,5 +456,29 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+
+
+        //[HttpGet]
+        //[Route("token")]
+        //public IActionResult Tokens()
+        //{
+        //    try
+        //    {
+        //        Request.Headers.TryGetValue("Authorization", out this.head);
+        //        var result = this._notesManager.GetToken(this.head);
+        //        if (result != null)
+        //        {
+        //            return this.Ok(new { Status = true, Message = "Token Data", Data = result });
+        //        }
+        //        else
+        //        {
+        //            return this.BadRequest(new { Status = false, Message = "Token is Empty" });
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return this.NotFound(new { Status = false, Message = e.Message });
+        //    }
+        //}
     }
 }

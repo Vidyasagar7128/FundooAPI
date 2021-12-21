@@ -9,11 +9,13 @@ namespace FundoManager.Manager
 {
     using System;
     using System.Collections.Generic;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Threading.Tasks;
     using FundoManager.Interfaces;
     using FundooModels;
     using FundooRepository.Interfaces;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Primitives;
 
     /// <summary>
     /// NotesManager manage the Notes repo
@@ -40,11 +42,11 @@ namespace FundoManager.Manager
         /// </summary>
         /// <param name="notesModel">passing NotesModel</param>
         /// <returns>done or not</returns>
-        public async Task<string> AddNewNote(NotesModel notesModel)
+        public async Task<string> AddNewNote(StringValues token, NotesModel notesModel)
         {
             try
             {
-                return await this._notesRepository.AddNote(notesModel);
+                return await this._notesRepository.AddNote(token, notesModel);
             }
             catch (Exception e)
             {
@@ -75,11 +77,11 @@ namespace FundoManager.Manager
         /// </summary>
         /// <param name="userId">User Id</param>
         /// <returns>notes List</returns>
-        public async Task<List<NotesModel>> ShowAllNotes(long userId)
+        public async Task<List<NotesModel>> ShowAllNotes(StringValues token)
         {
             try
             {
-                return await this._notesRepository.ShowNotes(userId);
+                return await this._notesRepository.ShowNotes(token);
             }
             catch (Exception e)
             {
@@ -258,5 +260,17 @@ namespace FundoManager.Manager
                 throw new Exception(e.Message);
             }
         }
+
+        //public JwtSecurityToken GetToken(StringValues token)
+        //{
+        //    try
+        //    {
+        //        return this._notesRepository.ValidateJwtToken(token);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
     }
 }

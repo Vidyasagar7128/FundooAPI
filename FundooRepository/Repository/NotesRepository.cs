@@ -9,7 +9,10 @@ namespace FundooRepository.Repository
 {
     using System;
     using System.Collections.Generic;
+    using System.IdentityModel.Tokens;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
@@ -19,6 +22,7 @@ namespace FundooRepository.Repository
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Primitives;
 
     /// <summary>
     /// NotesRepository it handles the notes API
@@ -52,12 +56,14 @@ namespace FundooRepository.Repository
         /// <param name="notes">passing NotesModel</param>
         /// <returns>added or not </returns>
         /// <returns>string as note added or not</returns>
-        public async Task<string> AddNote(NotesModel notes)
+        public async Task<string> AddNote(StringValues token,NotesModel notes)
         {
             try
             {
+                var id = ValidateJwtToken(token);
                 if (notes != null)
                 {
+                    notes.UserId = id;
                     this._userContext.Notes.Add(notes);
                     await this._userContext.SaveChangesAsync();
                     return "Note Added Succesfully!";
@@ -78,18 +84,36 @@ namespace FundooRepository.Repository
         /// </summary>
         /// <param name="userId">long UserId</param>
         /// <returns>list of NotesModel</returns>
-        public async Task<List<NotesModel>> ShowNotes(long userId)
+        public async Task<List<NotesModel>> ShowNotes(StringValues token)
         {
             try
             {
+                var userId = ValidateJwtToken(token);
+                
                 var notesLength = this._userContext.Notes.Where(e => e.UserId == userId).ToList();
                 if (notesLength.Count >= 1)
                 {
-                    return await this._userContext.Notes.Where(e => e.UserId == userId && e.Status == 0).ToListAsync<NotesModel>();
+                    var noteList = (
+                                from note in this._userContext.Notes.ToList()
+                                where note.UserId == userId
+                                select new NotesModel()
+                                {
+                                    NoteId = note.NoteId,
+                                    Title = note.Title,
+                                    Body = note.Body,
+                                    Theme = note.Theme,
+                                    Image = note.Image,
+                                    Reminder = note.Reminder,
+                                    Pin = note.Pin,
+                                    Status = note.Status,
+                                    LabelId = note.LabelId,
+                                    UserId = userId,
+                                }).ToList();
+                    return noteList;
                 }
                 else
                 {
-                    throw new ArgumentNullException("You Don't have Notes!");
+                    throw new Exception("You Don't have Notes!");
                 }
             }
             catch (Exception e)
@@ -147,6 +171,7 @@ namespace FundooRepository.Repository
         {
             try
             {
+                //var id = ValidateJwtToken();
                 var idCheck = this._userContext.Notes.Where(e => e.NoteId == notesModel.NoteId && e.UserId == notesModel.UserId).FirstOrDefault();
                 if (idCheck != null)
                 {
@@ -416,6 +441,26 @@ namespace FundooRepository.Repository
                 {
                     return "Failed to set Reminder.";
                 }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private long ValidateJwtToken(StringValues token)
+        {
+            try
+            {
+                var tk = token.ToString().Split(" ");
+                var stk = tk[1];
+                var handler = new JwtSecurityTokenHandler();
+                JwtSecurityToken tokens = handler.ReadJwtToken(tk[1]);
+                var newToken = tokens as JwtSecurityToken;
+                var paylods = newToken.Payload;
+                var email = paylods.Claims.First(c => c.Type == "unique_name").Value;
+                var user = this._userContext.Users.Where(e => e.Email == email).FirstOrDefault();
+                return user.UserId;
             }
             catch (Exception e)
             {

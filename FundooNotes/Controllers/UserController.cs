@@ -125,13 +125,13 @@ namespace FundooNotes.Controllers
                 else
                 {
                     this._logger.LogWarning("Something went Wrong!");
-                    return this.BadRequest(new { Status = false, Message = "Something went Wrong!" });
+                    return this.BadRequest(new { Status = false, Message = result });
                 }
             }
             catch (Exception e)
             {
                 this._logger.LogError($"Error : {e.Message}");
-                return this.NotFound(new ResponseModel<string>()
+                return this.NotFound(new
                 {
                     Status = false,
                     Message = e.Message
